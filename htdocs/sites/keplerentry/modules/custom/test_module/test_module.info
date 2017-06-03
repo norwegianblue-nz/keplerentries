@@ -1,0 +1,7 @@
+name = test_module
+description = Somewhere to put snippets of php test code. Should NOT be enabled and should be ignored by git
+core = 7.x
+package = "norwegianblue Custom"
+php = 7.0
+version = "7.x-1.0"
+

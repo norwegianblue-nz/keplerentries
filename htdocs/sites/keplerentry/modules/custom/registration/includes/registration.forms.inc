@@ -23,6 +23,17 @@ function registration_form($form, &$form_state, Registration $registration) {
 
   $settings = registration_entity_settings($registration->entity_type, $registration->entity_id);
 
+// norwegian.blue 20170602
+// Output message if entrant appears too old.
+  $old = isset($settings['settings']['oldage']) ? $settings['settings']['oldage'] : 75;
+  if ($old > 0 ) {
+    $old_seconds = ($old * 365.25 * 24 * 3600);
+    $age_seconds = age_event_day($age);
+    if ($age_seconds > $old_seconds){
+        drupal_set_message(t("You appear to be over the age of ".$old." on the day of the event. Is your DOB in your profile correct?"), 'warning');
+    }
+  }
+
   if (!registration_has_room($registration->entity_type, $registration->entity_id)) {
     if ($settings['settings']['registration_waitlist_enable'] == 1 && $settings['settings']['registration_waitlist_message_enable'] == 1) {
       drupal_set_message(t($settings['settings']['registration_waitlist_message']), 'warning');
@@ -640,7 +651,29 @@ function registration_entity_settings_form($form, &$form_state, $settings, $enti
     '#collapsed' => FALSE,
     '#tree' => TRUE,
   );
-
+  // Set min age on day of event - norwegian.blue 20170603
+  $form['settings']['minage'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Minimum Age'),
+    '#description' => t('The minimum age on race-day. Leave at 0 for no limit.'),
+    '#size' => 3,
+    '#maxlength' => 4,
+    '#required' => TRUE,
+    '#default_value' => isset($settings['settings']['minage']) ? $settings['settings']['minage'] : 0,
+  );
+  
+  // Set max age on day of event - norwegian.blue 20170603
+  $form['settings']['oldage'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Warning Age'),
+    '#description' => t('The age on race-day to flag a warning about DOB eg 75. Set to 0 for no limit.'),
+    '#size' => 3,
+    '#maxlength' => 4,
+    '#required' => TRUE,
+    '#default_value' => isset($settings['settings']['oldage']) ? $settings['settings']['oldage'] : 75,
+  );
+  
+  
   $form['settings']['maximum_spaces'] = array(
     '#type' => 'textfield',
     '#title' => t('Spaces allowed'),
@@ -711,6 +744,12 @@ function registration_entity_settings_form_validate($form, &$form_state) {
   $capacity = $form_state['values']['capacity'];
   if (!is_numeric($capacity) || ((int) $capacity != $capacity) || ($capacity < 0)) {
     form_set_error('capacity', t('"Capacity" must be a positive integer or 0 for unlimited.'));
+  }
+
+  // Ensure agelimit is a non-negative integer.
+  $agelimit = $form_state['values']['settings']['minage'];
+  if (!is_numeric($agelimit) || ((int) $agelimit != $agelimit) || ($agelimit < 0)) {
+    form_set_error('agelimit', t('"Minimum Age" must be a positive integer or 0 for unlimited.'));
   }
 
   // Ensure slot limit is a non-negative integer.

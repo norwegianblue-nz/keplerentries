@@ -751,6 +751,54 @@ function registration_has_room($entity_type, $entity_id, $spaces = 1, $registrat
 }
 
 /**
+ * 
+ * norwegian.blue 20170603
+ * 
+ * Determine if entrant meets min age on day of event
+ * 
+ * @param string $entity_type
+ *   The host entity type.
+ * @param int $entity_id
+ *   The host entity ID.
+ *
+ * @return bool
+ * 
+ */
+function minimum_age_met($entity_type, $entity_id, $reset = FALSE) {
+  $settings = registration_entity_settings($entity_type, $entity_id, $reset);
+  $agelimit = isset($settings['settings']['minage']) ? $settings['settings']['minage'] : 0;
+//  $uid = $GLOBALS['user']->uid;
+//  $profile = profile2_load_by_user($uid, 'main');
+//  $dob_str = $profile->field_dob['und'][0]['value'];
+//  $dob_date = getdate(strtotime($dob_str));
+//  $race_date = getdate(strtotime("first Saturday of December"));
+  $age_seconds = age_event_day($age);
+  $agelimit_seconds = ($agelimit * 365.25 * 24 * 3600) ;
+  if ($agelimit_seconds > $age_seconds){
+      return FALSE;
+  }
+  return TRUE;
+}
+
+/**
+ * norwegian.blue 20170603
+ * 
+ * Determine age on raceday
+ * 
+ * @return age in seconds (integer)
+ * 
+ */
+function age_event_day($age){
+  $uid = $GLOBALS['user']->uid;
+  $profile = profile2_load_by_user($uid, 'main');
+  $dob_str = $profile->field_dob['und'][0]['value'];
+  $dob_date = getdate(strtotime($dob_str));
+  $race_date = getdate(strtotime("first Saturday of December"));
+  $age_seconds = $race_date[0] - $dob_date[0];
+  return $age_seconds;  
+}
+
+/**
  * Determines current number of spaces filled for a host entity.
  *
  * @param string $entity_type
@@ -1224,6 +1272,15 @@ function registration_status($entity_type, $entity_id, $reset = FALSE, $spaces =
       $status = FALSE;
       $errors[] = t('You may not register for more than @count spaces.', array('@count' => $settings['settings']['maximum_spaces']));
     }
+    // check age restriction - norwegian.blue
+//    $agelimit = isset($settings['settings']['minage']) ? $settings['settings']['minage'] : 0;
+//    $racedayage = 17;
+//    if ($agelimit > $racedayage){
+    if (!minimum_age_met($entity_type, $entity_id, $reset)) {
+      $status = FALSE;
+      $errors[] = t('You may not register if age on day of event is less than @agemin.', array('@agemin' => $settings['settings']['minage']));
+      drupal_set_message(t("Your date of birth indicates that you will not be @agemin on the day of the event", array('@agemin' => $settings['settings']['minage'])), 'warning');
+      }
     // check capacity
     if (!registration_has_room($entity_type, $entity_id, $spaces, $registration_id, $reset)) {
       $status = FALSE;
