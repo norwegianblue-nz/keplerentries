@@ -1,0 +1,23 @@
+diff -urN registration_commerce.old/registration_commerce.module registration_commerce/registration_commerce.module
+--- registration_commerce.old/registration_commerce.module	2014-02-07 09:10:26.000000000 +1300
++++ registration_commerce/registration_commerce.module	2016-05-30 11:53:08.464622029 +1200
+@@ -190,8 +190,8 @@
+         $uri = entity_uri('registration', $entity);
+         $entity->content['pay_link'] = array(
+           '#weight' => 99,
+-          '#markup' => l(t('Add registration to cart'), $uri['path'] . '/pay', array(
+-            'attributes' => array('classes' => array('button')),
++          '#markup' => l(t('Proceed to cart'), $uri['path'] . '/pay', array(
++            'attributes' => array('class' => array('button')),
+           )),
+         );
+       }
+@@ -211,7 +211,7 @@
+   if ($reg_settings['enable']) {
+     $form['add_to_cart'] = array(
+       '#type' => 'checkbox',
+-      '#title' => t('Add registration to cart and redirect to cart'),
++      '#title' => t('Proceed to cart'),
+       '#default_value' => isset($form_state['registration']->registration_id) ? FALSE : TRUE,
+       '#weight' => 99,
+       '#access' => user_access('edit any registration'),

@@ -1,0 +1,5 @@
+name = Commerce Continue Shopping
+description = Add the Continue Shopping link to the cart, powered by Drupal Commerce. Expects the store to be at /store
+core = 7.x
+package = "norwegianblue Custom"
+version = "7.x-1.0"

@@ -1,0 +1,17 @@
+#edit-field-runner-type-tid-wrapper .description, #edit-field-tags-tid-wrapper .description {display:none;}
+.view-registrationplaces caption {display: none;}
+.view-registrationplaces .attachment thead {display: none;}
+.view-registrationplaces td {width: 30%;}
+.view-event-entry-places-taken-summary table {margin: 3px 0;}
+.view-event-entry-places-taken-summary thead {display:none;}
+.view-header > .view-event-entry-places-taken-summary > .view-content table:first-of-type > thead {display: table-header-group;}
+.view-event-entry-places-taken-summary td {width: 33%;}
+.view-display-id-page_2 form#views-form-event-entry-management-page-2 {display: none;}
+.view-display-id-attachment_3 table:first-of-type > thead {display: table-header-group;}
+.views-row-edit-static, .views-row-edit-edit .form-required {display: none;}
+.view-display-id-page_2 td, .view-display-id-page_3 td {font-size: 1.4em; font-weight: bold}
+ol.waitlist-list {counter-reset: li; margin-left: 0; padding-left: 0;  padding: 4px 0px 0px 0px;  margin-bottom: 15px; list-style-position: outside;}
+ol.waitlist-list > li {position: relative; margin: 0 0 6px 2em; padding: 4px 8px 4px 25px; list-style: none;  background: #f6f6f6; border-bottom: 1px solid #CCCCCC; color: #333333; font-family: Verdana,Geneva,sans-serif; line-height: 18px;}
+ol.waitlist-list li {font-size: 12px !important;}
+ol.waitlist-list  > li::before {content: counter(li); counter-increment: li; position: absolute; top: -2px; left: -2em; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; width: 3em; margin-right: 8px; padding: 4px; border-top: 3px solid #666; color: #fff; background: #666; font-weight: bold; font-family: "Helvetica Neue", Arial, sans-serif; text-align: center;}
+.page-node-18 .region-content,.page-node-19 .region-content {padding-left: 0 !important}

@@ -1,0 +1,7 @@
+name = evententry_lineitem_removed
+description = Delete event entry registration entity when line-item is removed from the cart
+core = 7.x
+package = "norwegianblue Custom"
+php = 5.3
+version = "7.x-1.0"
+

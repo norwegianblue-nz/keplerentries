@@ -1,0 +1,9 @@
+/**
+  *
+  * This version patched to output a message to the user if no places left for 
+  * an event when they go to the entry form.
+  *
+  * See norblu02.patch in this directory (though it needs to be moved 1 directory
+  * up to be applied)
+  *
+  */

@@ -1,0 +1,14 @@
+; $Id: $
+name = Commerce Custom Line Item
+description = Creates a new Line Item type for customisation.
+core = 7.x
+package = "norwegianblue Custom"
+php = 5.3
+dependencies[] = commerce
+
+
+version = "7.x-dev"
+core = "7.x"
+project = "commerce_custom_lineitem"
+
+

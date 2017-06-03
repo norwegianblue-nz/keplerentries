@@ -1,0 +1,9 @@
+/**
+  *
+  * This version patched to correct a typo (css term classes -> class) and to
+  * rename some buttons
+  *
+  * See norblu01.patch in this directory (though it needs to be moved 1 directory
+  * up to be applied)
+  *
+  */

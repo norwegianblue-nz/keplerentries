@@ -1,0 +1,21 @@
+<?php
+/*
+ * Function to create a custom line item  - Fields to be added manually
+ */
+ 
+/*
+ * This one will create a line item type called 'payment' for custom payments
+ */
+function commerce_custom_lineitem_commerce_line_item_type_info() {
+  $line_item_types = array();
+  $line_item_types['payment'] = array(
+    'type' => 'payment',
+    'name' => t('Payment'),
+    'description' => t('A custom payment'),
+    'product' => TRUE,
+    'add_form_submit_value' => t('Add Payment'),
+    'base' => 'commerce_product_line_item',
+  );
+  return $line_item_types;
+}
+

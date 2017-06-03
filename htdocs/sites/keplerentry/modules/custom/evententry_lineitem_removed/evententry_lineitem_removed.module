@@ -1,0 +1,35 @@
+<?php
+
+/**
+ *
+ * Module to remove a registration entity if the line-item is removed from the
+ * cart
+ *
+ */
+ 
+/**
+ * Implements hook_commerce_cart_product_remove().
+ * Check if we're removing a registration line item and delete the corresponding
+ * registration so the user can sign up again without any errors.
+ * @param  object $order     Commerce Order entity this item is attached to
+ * @param  object $product   Commerce Product entity (REGISTRATION if reg item)
+ * @param  int    $quantity  In the case of registration, number of tickets
+ * @param  object $line_item Commerce Line Item entity (type = 'registration')
+ * @return                   (none)
+ */
+function evententry_lineitem_removed_commerce_cart_product_remove($order, $product, $quantity, $line_item){
+/**
+  *  I use an Entity Metadata Wrapper here for convenience (requires entity 
+  *  module), but you could also check $line_item->type or whatever the
+  *  equivalent property is.
+  */
+  $li_wrapper = entity_metadata_wrapper('commerce_line_item', $line_item);
+  if ($li_wrapper->getBundle() === 'registration') {   
+  /**
+    *  REGISTRATION_COMMERCE_FIELD is a constant set by Registration Commerce,
+    *  so this will make sure our code remains consistent if they ever change it
+    */
+    $registration_id = $li_wrapper->{REGISTRATION_COMMERCE_FIELD}->raw();
+    registration_delete_multiple(array($registration_id));
+  }
+}

@@ -1,0 +1,43 @@
+diff -uNr registration.old/modules/registration_waitlist/registration_waitlist.module registration/modules/registration_waitlist/registration_waitlist.module
+--- registration.old/modules/registration_waitlist/registration_waitlist.module	2015-08-26 11:50:41.000000000 +1200
++++ registration/modules/registration_waitlist/registration_waitlist.module	2016-06-13 12:23:41.038252662 +1200
+@@ -171,6 +171,15 @@
+       if (($waitlist_capacity - $waitlist_count) < 1) {
+         $active = FALSE;
+         $errors[] = t('Waitlist is full.');
++        /**
++        * norwegian.blue 20160602
++        * Out out a message to the user rather than a simple blank page
++        */
++			$error_message = t('Sorry, your chosen event and the waitlist is full.');
++			drupal_set_message($error_message, 'error');
++        /**
++        * end norwegian.blue
++        */
+       }
+     }
+   }
+diff -uNr registration.old/README.nb registration/README.nb
+--- registration.old/README.nb	1970-01-01 12:00:00.000000000 +1200
++++ registration/README.nb	2016-06-13 12:23:41.038252662 +1200
+@@ -0,0 +1,9 @@
++/**
++  *
++  * This version patched to output a message to the user if no places left for 
++  * an event when they go to the entry form.
++  *
++  * See norblu02.patch in this directory (though it needs to be moved 1 directory
++  * up to be applied)
++  *
++  */
+\ No newline at end of file
+diff -uNr registration.old/registration.info registration/registration.info
+--- registration.old/registration.info	2015-10-08 06:49:01.000000000 +1300
++++ registration/registration.info	2016-06-13 12:23:41.038252662 +1200
+@@ -1,5 +1,5 @@
+ name = Registration
+-description = Entity based registration system.
++description = Entity based registration system. Custom version. See README.nb
+ package = Registration
+ core = 7.x
+ configure = admin/structure/registration

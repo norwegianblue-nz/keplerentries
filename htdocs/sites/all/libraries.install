@@ -1,0 +1,14 @@
+wget -i libraries.get
+cd libraries
+echo $(pwd)
+for file in $(ls -1 ../*.zip);
+ do
+  pfx=$(echo $file | cut -d'/' -f2 |cut -d'.' -f1 );
+  echo "      Installing $pfx"
+  unzip  $file;
+ done
+echo -e "\n "
+cd ..
+cat libraries.get >> libraries.got
+cat /dev/null > libraries.get
+rm *.zip
