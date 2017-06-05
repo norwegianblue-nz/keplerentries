@@ -30,7 +30,7 @@ function registration_form($form, &$form_state, Registration $registration) {
     $old_seconds = ($old * 365.25 * 24 * 3600);
     $age_seconds = age_event_day($age);
     if ($age_seconds > $old_seconds){
-        drupal_set_message(t("You appear to be over the age of ".$old." on the day of the event. Is your DOB in your profile correct?"), 'warning');
+        drupal_set_message(t("You appear to be over the age of ".$old." on the day of the event. Please check that your DOB in your runner profile is correct?"), 'warning');
     }
   }
 
@@ -746,10 +746,16 @@ function registration_entity_settings_form_validate($form, &$form_state) {
     form_set_error('capacity', t('"Capacity" must be a positive integer or 0 for unlimited.'));
   }
 
-  // Ensure agelimit is a non-negative integer.
+  // Ensure agelimit is a non-negative integer. - norwegian.blue 20170603
   $agelimit = $form_state['values']['settings']['minage'];
   if (!is_numeric($agelimit) || ((int) $agelimit != $agelimit) || ($agelimit < 0)) {
     form_set_error('agelimit', t('"Minimum Age" must be a positive integer or 0 for unlimited.'));
+  }
+
+  // Ensure oldage is a non-negative integer. - norwegian.blue 20170603
+  $maxage = $form_state['values']['settings']['oldage'];
+  if (!is_numeric($maxage) || ((int) $maxage != $agelimit) || ($maxage < 0)) {
+    form_set_error('agelimit', t('"Warning Age" must be a positive integer or 0 for no warning.'));
   }
 
   // Ensure slot limit is a non-negative integer.

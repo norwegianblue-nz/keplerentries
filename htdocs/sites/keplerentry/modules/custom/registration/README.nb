@@ -6,4 +6,12 @@
   * See norblu02.patch in this directory (though it needs to be moved 1 directory
   * up to be applied)
   *
+  * 20170603
+  * ========
+  *
+  * Patches added to check for ages (min and max) and deny access to form if too
+  * young and output a warning if too old.
+  * Max and min ages configurable by the administrator
+  * See norblu03.patch
+  *
   */

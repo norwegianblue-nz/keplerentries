@@ -1,0 +1,154 @@
+diff -uNr registration.old/includes/registration.forms.inc registration/includes/registration.forms.inc
+--- registration.old/includes/registration.forms.inc	2015-08-26 00:50:41.000000000 +0100
++++ registration/includes/registration.forms.inc	2017-06-03 20:04:15.150841429 +0100
+@@ -23,6 +23,17 @@
+ 
+   $settings = registration_entity_settings($registration->entity_type, $registration->entity_id);
+ 
++// norwegian.blue 20170602
++// Output message if entrant appears too old.
++  $old = isset($settings['settings']['oldage']) ? $settings['settings']['oldage'] : 75;
++  if ($old > 0 ) {
++    $old_seconds = ($old * 365.25 * 24 * 3600);
++    $age_seconds = age_event_day($age);
++    if ($age_seconds > $old_seconds){
++        drupal_set_message(t("You appear to be over the age of ".$old." on the day of the event. Is your DOB in your profile correct?"), 'warning');
++    }
++  }
++
+   if (!registration_has_room($registration->entity_type, $registration->entity_id)) {
+     if ($settings['settings']['registration_waitlist_enable'] == 1 && $settings['settings']['registration_waitlist_message_enable'] == 1) {
+       drupal_set_message(t($settings['settings']['registration_waitlist_message']), 'warning');
+@@ -640,7 +651,29 @@
+     '#collapsed' => FALSE,
+     '#tree' => TRUE,
+   );
+-
++  // Set min age on day of event - norwegian.blue 20170603
++  $form['settings']['minage'] = array(
++    '#type' => 'textfield',
++    '#title' => t('Minimum Age'),
++    '#description' => t('The minimum age on race-day. Leave at 0 for no limit.'),
++    '#size' => 3,
++    '#maxlength' => 4,
++    '#required' => TRUE,
++    '#default_value' => isset($settings['settings']['minage']) ? $settings['settings']['minage'] : 0,
++  );
++  
++  // Set max age on day of event - norwegian.blue 20170603
++  $form['settings']['oldage'] = array(
++    '#type' => 'textfield',
++    '#title' => t('Warning Age'),
++    '#description' => t('The age on race-day to flag a warning about DOB eg 75. Set to 0 for no limit.'),
++    '#size' => 3,
++    '#maxlength' => 4,
++    '#required' => TRUE,
++    '#default_value' => isset($settings['settings']['oldage']) ? $settings['settings']['oldage'] : 75,
++  );
++  
++  
+   $form['settings']['maximum_spaces'] = array(
+     '#type' => 'textfield',
+     '#title' => t('Spaces allowed'),
+@@ -713,6 +746,18 @@
+     form_set_error('capacity', t('"Capacity" must be a positive integer or 0 for unlimited.'));
+   }
+ 
++  // Ensure agelimit is a non-negative integer. - norwegian.blue 20170603
++  $agelimit = $form_state['values']['settings']['minage'];
++  if (!is_numeric($agelimit) || ((int) $agelimit != $agelimit) || ($agelimit < 0)) {
++    form_set_error('agelimit', t('"Minimum Age" must be a positive integer or 0 for unlimited.'));
++  }
++
++  // Ensure oldage is a non-negative integer. - norwegian.blue 20170603
++  $maxage = $form_state['values']['settings']['oldage'];
++  if (!is_numeric($maxage) || ((int) $maxage != $agelimit) || ($maxage < 0)) {
++    form_set_error('agelimit', t('"Warning Age" must be a positive integer or 0 for no warning.'));
++  }
++
+   // Ensure slot limit is a non-negative integer.
+   $slot_limit = $form_state['values']['settings']['maximum_spaces'];
+   if (!is_numeric($slot_limit) || ((int) $slot_limit != $slot_limit) || ($slot_limit < 0)) {
+diff -uNr registration.old/README.nb registration/README.nb
+--- registration.old/README.nb	2016-06-13 01:23:41.000000000 +0100
++++ registration/README.nb	2017-06-03 20:08:03.904796929 +0100
+@@ -6,4 +6,12 @@
+   * See norblu02.patch in this directory (though it needs to be moved 1 directory
+   * up to be applied)
+   *
++  * 20170603
++  * ========
++  *
++  * Patches added to check for ages (min and max) and deny access to form if too
++  * young and output a warning if too old.
++  * Max and min ages configurable by the administrator
++  * See norblu03.patch
++  *
+   */
+\ No newline at end of file
+diff -uNr registration.old/registration.module registration/registration.module
+--- registration.old/registration.module	2016-06-13 01:23:41.000000000 +0100
++++ registration/registration.module	2017-06-05 12:10:34.400722930 +0100
+@@ -751,6 +751,49 @@
+ }
+ 
+ /**
++ * 
++ * norwegian.blue 20170603
++ * 
++ * Determine if entrant meets min age on day of event
++ * 
++ * @param string $entity_type
++ *   The host entity type.
++ * @param int $entity_id
++ *   The host entity ID.
++ *
++ * @return bool
++ * 
++ */
++function minimum_age_met($entity_type, $entity_id, $reset = FALSE) {
++  $settings = registration_entity_settings($entity_type, $entity_id, $reset);
++  $agelimit = isset($settings['settings']['minage']) ? $settings['settings']['minage'] : 0;
++  $age_seconds = age_event_day($age);
++  $agelimit_seconds = ($agelimit * 365.25 * 24 * 3600) ;
++  if ($agelimit_seconds > $age_seconds){
++      return FALSE;
++  }
++  return TRUE;
++}
++
++/**
++ * norwegian.blue 20170603
++ * 
++ * Determine age on raceday
++ * 
++ * @return age in seconds (integer)
++ * 
++ */
++function age_event_day($age){
++  $uid = $GLOBALS['user']->uid;
++  $profile = profile2_load_by_user($uid, 'main');
++  $dob_str = $profile->field_dob['und'][0]['value'];
++  $dob_date = getdate(strtotime($dob_str));
++  $race_date = getdate(strtotime("first Saturday of December"));
++  $age_seconds = $race_date[0] - $dob_date[0];
++  return $age_seconds;  
++}
++
++/**
+  * Determines current number of spaces filled for a host entity.
+  *
+  * @param string $entity_type
+@@ -1224,6 +1267,12 @@
+       $status = FALSE;
+       $errors[] = t('You may not register for more than @count spaces.', array('@count' => $settings['settings']['maximum_spaces']));
+     }
++    // check age restriction - norwegian.blue 20170603
++    if (!minimum_age_met($entity_type, $entity_id, $reset)) {
++      $status = FALSE;
++      $errors[] = t('You may not register if age on day of event is less than @agemin.', array('@agemin' => $settings['settings']['minage']));
++      drupal_set_message(t("Your date of birth indicates that you will not be @agemin on the day of the event. The minimum age to enter this event is @agemin. See Conditions of Entry for details.", array('@agemin' => $settings['settings']['minage'])), 'warning');
++      }
+     // check capacity
+     if (!registration_has_room($entity_type, $entity_id, $spaces, $registration_id, $reset)) {
+       $status = FALSE;
