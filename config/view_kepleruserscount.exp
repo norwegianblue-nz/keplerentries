@@ -1,0 +1,111 @@
+                                                              $view = new view();
+$view->name = 'kepleruserscount';
+$view->description = '';
+$view->tag = 'norwegian.blue';
+$view->base_table = 'users';
+$view->human_name = 'KeplerUsersCount';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['group_by'] = TRUE;
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['access']['perm'] = 'access user profiles';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['pager']['type'] = 'none';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'rid' => 'rid',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'rid' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+/* Field: COUNT(User: Roles) */
+$handler->display->display_options['fields']['rid']['id'] = 'rid';
+$handler->display->display_options['fields']['rid']['table'] = 'users_roles';
+$handler->display->display_options['fields']['rid']['field'] = 'rid';
+$handler->display->display_options['fields']['rid']['group_type'] = 'count';
+$handler->display->display_options['fields']['rid']['label'] = 'Total Users';
+$handler->display->display_options['fields']['rid']['separator'] = ', ';
+/* Filter criterion: User: Active */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'users';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = '1';
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: User: Roles */
+$handler->display->display_options['filters']['rid']['id'] = 'rid';
+$handler->display->display_options['filters']['rid']['table'] = 'users_roles';
+$handler->display->display_options['filters']['rid']['field'] = 'rid';
+$handler->display->display_options['filters']['rid']['value'] = array(
+  4 => '4',
+  5 => '5',
+);
+$handler->display->display_options['filters']['rid']['expose']['operator_id'] = 'rid_op';
+$handler->display->display_options['filters']['rid']['expose']['label'] = 'Roles';
+$handler->display->display_options['filters']['rid']['expose']['operator'] = 'rid_op';
+$handler->display->display_options['filters']['rid']['expose']['identifier'] = 'rid';
+$handler->display->display_options['filters']['rid']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['rid']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['rid']['expose']['reduce'] = TRUE;
+
+/* Display: Pre-authorised */
+$handler = $view->new_display('attachment', 'Pre-authorised', 'attachment_1');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: COUNT(User: Roles) */
+$handler->display->display_options['fields']['rid']['id'] = 'rid';
+$handler->display->display_options['fields']['rid']['table'] = 'users_roles';
+$handler->display->display_options['fields']['rid']['field'] = 'rid';
+$handler->display->display_options['fields']['rid']['group_type'] = 'count';
+$handler->display->display_options['fields']['rid']['label'] = 'Users yet to validate';
+$handler->display->display_options['fields']['rid']['separator'] = ', ';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: User: Active */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'users';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = '1';
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: User: Roles */
+$handler->display->display_options['filters']['rid']['id'] = 'rid';
+$handler->display->display_options['filters']['rid']['table'] = 'users_roles';
+$handler->display->display_options['filters']['rid']['field'] = 'rid';
+$handler->display->display_options['filters']['rid']['value'] = array(
+  4 => '4',
+);
+$handler->display->display_options['filters']['rid']['expose']['operator_id'] = 'rid_op';
+$handler->display->display_options['filters']['rid']['expose']['label'] = 'Roles';
+$handler->display->display_options['filters']['rid']['expose']['operator'] = 'rid_op';
+$handler->display->display_options['filters']['rid']['expose']['identifier'] = 'rid';
+$handler->display->display_options['filters']['rid']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['rid']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['rid']['expose']['reduce'] = TRUE;

@@ -1,0 +1,645 @@
+$view = new view();
+$view->name = 'entries_management';
+$view->description = 'Editable Field view for entry management';
+$view->tag = 'norwegian.blue, event entry';
+$view->base_table = 'registration';
+$view->human_name = 'Entries Management';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'Entries Management';
+$handler->display->display_options['use_ajax'] = TRUE;
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['access']['type'] = 'role';
+$handler->display->display_options['access']['role'] = array(
+  3 => '3',
+  6 => '6',
+);
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['pager']['options']['items_per_page'] = '100';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['pager']['options']['id'] = '0';
+$handler->display->display_options['pager']['options']['quantity'] = '9';
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'registration_id' => 'registration_id',
+  'field_event_title' => 'field_event_title',
+  'view_registration' => 'view_registration',
+  'uid' => 'uid',
+  'name' => 'name',
+  'field_name_address_first_name' => 'field_name_address_first_name',
+  'field_name_address_last_name' => 'field_name_address_last_name',
+  'field_nationality' => 'field_nationality',
+  'field_name_address_country' => 'field_name_address_country',
+  'field_gender' => 'field_gender',
+  'state_edit' => 'state_edit',
+  'field_est_time_this_year_editable' => 'field_est_time_this_year_editable',
+  'field_medal_year_editable' => 'field_medal_year_editable',
+  'field_no_of_prev_events_editable' => 'field_no_of_prev_events_editable',
+  'field_previous_best_time_editable' => 'field_previous_best_time_editable',
+  'field_runner_type_editable' => 'field_runner_type_editable',
+  'created' => 'created',
+  'field_tags' => 'field_tags',
+  'field_notes_editable' => 'field_notes_editable',
+  'order_id' => 'order_id',
+  'nothing' => 'nothing',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'registration_id' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_event_title' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'view_registration' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'uid' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'name' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_name_address_first_name' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_name_address_last_name' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_nationality' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_name_address_country' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_gender' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'state_edit' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_est_time_this_year_editable' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_medal_year_editable' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_no_of_prev_events_editable' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_previous_best_time_editable' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_runner_type_editable' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'created' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_tags' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_notes_editable' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'order_id' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'nothing' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+$handler->display->display_options['style_options']['sticky'] = TRUE;
+$handler->display->display_options['style_options']['empty_table'] = TRUE;
+/* Relationship: Registration: User */
+$handler->display->display_options['relationships']['user_uid']['id'] = 'user_uid';
+$handler->display->display_options['relationships']['user_uid']['table'] = 'registration';
+$handler->display->display_options['relationships']['user_uid']['field'] = 'user_uid';
+/* Relationship: User: Profile */
+$handler->display->display_options['relationships']['profile']['id'] = 'profile';
+$handler->display->display_options['relationships']['profile']['table'] = 'users';
+$handler->display->display_options['relationships']['profile']['field'] = 'profile';
+$handler->display->display_options['relationships']['profile']['relationship'] = 'user_uid';
+$handler->display->display_options['relationships']['profile']['bundle_types'] = array(
+  'main' => 'main',
+);
+/* Relationship: Entity Reference: Referencing entity */
+$handler->display->display_options['relationships']['reverse_registration_commerce_reg_commerce_line_item']['id'] = 'reverse_registration_commerce_reg_commerce_line_item';
+$handler->display->display_options['relationships']['reverse_registration_commerce_reg_commerce_line_item']['table'] = 'registration';
+$handler->display->display_options['relationships']['reverse_registration_commerce_reg_commerce_line_item']['field'] = 'reverse_registration_commerce_reg_commerce_line_item';
+/* Field: Registration: Registration ID */
+$handler->display->display_options['fields']['registration_id']['id'] = 'registration_id';
+$handler->display->display_options['fields']['registration_id']['table'] = 'registration';
+$handler->display->display_options['fields']['registration_id']['field'] = 'registration_id';
+$handler->display->display_options['fields']['registration_id']['label'] = '';
+$handler->display->display_options['fields']['registration_id']['exclude'] = TRUE;
+$handler->display->display_options['fields']['registration_id']['element_label_colon'] = FALSE;
+/* Field: Registration: Event Title */
+$handler->display->display_options['fields']['field_event_title']['id'] = 'field_event_title';
+$handler->display->display_options['fields']['field_event_title']['table'] = 'field_data_field_event_title';
+$handler->display->display_options['fields']['field_event_title']['field'] = 'field_event_title';
+$handler->display->display_options['fields']['field_event_title']['label'] = '';
+$handler->display->display_options['fields']['field_event_title']['exclude'] = TRUE;
+$handler->display->display_options['fields']['field_event_title']['element_label_colon'] = FALSE;
+/* Field: Registration: View link */
+$handler->display->display_options['fields']['view_registration']['id'] = 'view_registration';
+$handler->display->display_options['fields']['view_registration']['table'] = 'registration';
+$handler->display->display_options['fields']['view_registration']['field'] = 'view_registration';
+$handler->display->display_options['fields']['view_registration']['label'] = 'View entry';
+$handler->display->display_options['fields']['view_registration']['alter']['alter_text'] = TRUE;
+$handler->display->display_options['fields']['view_registration']['alter']['text'] = '[field_event_title]';
+/* Field: User: Uid */
+$handler->display->display_options['fields']['uid']['id'] = 'uid';
+$handler->display->display_options['fields']['uid']['table'] = 'users';
+$handler->display->display_options['fields']['uid']['field'] = 'uid';
+$handler->display->display_options['fields']['uid']['relationship'] = 'user_uid';
+$handler->display->display_options['fields']['uid']['label'] = '';
+$handler->display->display_options['fields']['uid']['exclude'] = TRUE;
+$handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
+/* Field: User: Name */
+$handler->display->display_options['fields']['name']['id'] = 'name';
+$handler->display->display_options['fields']['name']['table'] = 'users';
+$handler->display->display_options['fields']['name']['field'] = 'name';
+$handler->display->display_options['fields']['name']['relationship'] = 'user_uid';
+$handler->display->display_options['fields']['name']['exclude'] = TRUE;
+/* Field: Profile: Name &amp; Address - First name */
+$handler->display->display_options['fields']['field_name_address_first_name']['id'] = 'field_name_address_first_name';
+$handler->display->display_options['fields']['field_name_address_first_name']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_first_name']['field'] = 'field_name_address_first_name';
+$handler->display->display_options['fields']['field_name_address_first_name']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_first_name']['label'] = 'First name';
+$handler->display->display_options['fields']['field_name_address_first_name']['alter']['text'] = '[field_name_address_first_name]';
+/* Field: Profile: Name &amp; Address - Last name */
+$handler->display->display_options['fields']['field_name_address_last_name']['id'] = 'field_name_address_last_name';
+$handler->display->display_options['fields']['field_name_address_last_name']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_last_name']['field'] = 'field_name_address_last_name';
+$handler->display->display_options['fields']['field_name_address_last_name']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_last_name']['label'] = 'Last name';
+$handler->display->display_options['fields']['field_name_address_last_name']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['field_name_address_last_name']['alter']['path'] = 'users/[name]';
+/* Field: Profile: Nationality */
+$handler->display->display_options['fields']['field_nationality']['id'] = 'field_nationality';
+$handler->display->display_options['fields']['field_nationality']['table'] = 'field_data_field_nationality';
+$handler->display->display_options['fields']['field_nationality']['field'] = 'field_nationality';
+$handler->display->display_options['fields']['field_nationality']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_nationality']['type'] = 'country_alpha_3';
+/* Field: Profile: Name &amp; Address - Country */
+$handler->display->display_options['fields']['field_name_address_country']['id'] = 'field_name_address_country';
+$handler->display->display_options['fields']['field_name_address_country']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_country']['field'] = 'field_name_address_country';
+$handler->display->display_options['fields']['field_name_address_country']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_country']['label'] = 'Country';
+$handler->display->display_options['fields']['field_name_address_country']['display_name'] = 0;
+/* Field: Profile: Gender */
+$handler->display->display_options['fields']['field_gender']['id'] = 'field_gender';
+$handler->display->display_options['fields']['field_gender']['table'] = 'field_data_field_gender';
+$handler->display->display_options['fields']['field_gender']['field'] = 'field_gender';
+$handler->display->display_options['fields']['field_gender']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_gender']['label'] = 'M/F';
+$handler->display->display_options['fields']['field_gender']['alter']['max_length'] = '1';
+$handler->display->display_options['fields']['field_gender']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['field_gender']['alter']['ellipsis'] = FALSE;
+$handler->display->display_options['fields']['field_gender']['alter']['trim'] = TRUE;
+/* Field: Registration: State form field */
+$handler->display->display_options['fields']['state_edit']['id'] = 'state_edit';
+$handler->display->display_options['fields']['state_edit']['table'] = 'registration';
+$handler->display->display_options['fields']['state_edit']['field'] = 'state_edit';
+$handler->display->display_options['fields']['state_edit']['label'] = 'Status';
+/* Field: Registration: Est. Time this year (editable) */
+$handler->display->display_options['fields']['field_est_time_this_year_editable']['id'] = 'field_est_time_this_year_editable';
+$handler->display->display_options['fields']['field_est_time_this_year_editable']['table'] = 'field_data_field_est_time_this_year';
+$handler->display->display_options['fields']['field_est_time_this_year_editable']['field'] = 'field_est_time_this_year_editable';
+$handler->display->display_options['fields']['field_est_time_this_year_editable']['label'] = 'Est. Time';
+$handler->display->display_options['fields']['field_est_time_this_year_editable']['type'] = 'editable';
+$handler->display->display_options['fields']['field_est_time_this_year_editable']['settings'] = array(
+  'click_to_edit' => 1,
+  'click_to_edit_style' => 'hover',
+  'empty_text' => '',
+  'fallback_format' => 'date_default',
+  'fallback_settings' => array(
+    'format_type' => 'timeonly',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  ),
+);
+$handler->display->display_options['fields']['field_est_time_this_year_editable']['widget_type'] = '0';
+$handler->display->display_options['fields']['field_est_time_this_year_editable']['suppress_label'] = 1;
+$handler->display->display_options['fields']['field_est_time_this_year_editable']['suppress_description'] = 1;
+/* Field: Registration: Medal Year (editable) */
+$handler->display->display_options['fields']['field_medal_year_editable']['id'] = 'field_medal_year_editable';
+$handler->display->display_options['fields']['field_medal_year_editable']['table'] = 'field_data_field_medal_year';
+$handler->display->display_options['fields']['field_medal_year_editable']['field'] = 'field_medal_year_editable';
+$handler->display->display_options['fields']['field_medal_year_editable']['label'] = 'Medal Yr';
+$handler->display->display_options['fields']['field_medal_year_editable']['type'] = 'editable';
+$handler->display->display_options['fields']['field_medal_year_editable']['settings'] = array(
+  'click_to_edit' => 1,
+  'click_to_edit_style' => 'button',
+  'empty_text' => '',
+  'fallback_format' => 'list_default',
+);
+$handler->display->display_options['fields']['field_medal_year_editable']['widget_type'] = 'options_select';
+$handler->display->display_options['fields']['field_medal_year_editable']['suppress_label'] = 1;
+$handler->display->display_options['fields']['field_medal_year_editable']['suppress_description'] = 1;
+/* Field: Registration: No of Prev events (editable) */
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['id'] = 'field_no_of_prev_events_editable';
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['table'] = 'field_data_field_no_of_prev_events';
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['field'] = 'field_no_of_prev_events_editable';
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['label'] = 'Prev events';
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['exclude'] = TRUE;
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['type'] = 'editable';
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['settings'] = array(
+  'click_to_edit' => 0,
+  'click_to_edit_style' => 'button',
+  'empty_text' => '',
+  'fallback_format' => 'list_default',
+);
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['widget_type'] = 'options_select';
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['suppress_label'] = 1;
+$handler->display->display_options['fields']['field_no_of_prev_events_editable']['suppress_description'] = 1;
+/* Field: Registration: Previous best result (editable) */
+$handler->display->display_options['fields']['field_previous_best_time_editable']['id'] = 'field_previous_best_time_editable';
+$handler->display->display_options['fields']['field_previous_best_time_editable']['table'] = 'field_data_field_previous_best_time';
+$handler->display->display_options['fields']['field_previous_best_time_editable']['field'] = 'field_previous_best_time_editable';
+$handler->display->display_options['fields']['field_previous_best_time_editable']['label'] = 'Prev best';
+$handler->display->display_options['fields']['field_previous_best_time_editable']['exclude'] = TRUE;
+$handler->display->display_options['fields']['field_previous_best_time_editable']['type'] = 'editable';
+$handler->display->display_options['fields']['field_previous_best_time_editable']['settings'] = array(
+  'click_to_edit' => 0,
+  'click_to_edit_style' => 'button',
+  'empty_text' => '',
+  'fallback_format' => 'date_default',
+  'fallback_settings' => array(
+    'format_type' => 'timeonly',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  ),
+);
+$handler->display->display_options['fields']['field_previous_best_time_editable']['widget_type'] = '0';
+$handler->display->display_options['fields']['field_previous_best_time_editable']['suppress_label'] = 1;
+$handler->display->display_options['fields']['field_previous_best_time_editable']['suppress_description'] = 1;
+/* Field: Registration: Runner Type (editable) */
+$handler->display->display_options['fields']['field_runner_type_editable']['id'] = 'field_runner_type_editable';
+$handler->display->display_options['fields']['field_runner_type_editable']['table'] = 'field_data_field_runner_type';
+$handler->display->display_options['fields']['field_runner_type_editable']['field'] = 'field_runner_type_editable';
+$handler->display->display_options['fields']['field_runner_type_editable']['label'] = 'Type';
+$handler->display->display_options['fields']['field_runner_type_editable']['type'] = 'editable';
+$handler->display->display_options['fields']['field_runner_type_editable']['settings'] = array(
+  'click_to_edit' => 0,
+  'click_to_edit_style' => 'button',
+  'empty_text' => '',
+  'fallback_format' => 'taxonomy_term_reference_link',
+);
+$handler->display->display_options['fields']['field_runner_type_editable']['widget_type'] = '0';
+$handler->display->display_options['fields']['field_runner_type_editable']['suppress_label'] = 0;
+$handler->display->display_options['fields']['field_runner_type_editable']['suppress_description'] = 0;
+/* Field: Registration: Date created */
+$handler->display->display_options['fields']['created']['id'] = 'created';
+$handler->display->display_options['fields']['created']['table'] = 'registration';
+$handler->display->display_options['fields']['created']['field'] = 'created';
+$handler->display->display_options['fields']['created']['label'] = '';
+$handler->display->display_options['fields']['created']['exclude'] = TRUE;
+$handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['created']['date_format'] = 'long';
+$handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+/* Field: Registration: Tags */
+$handler->display->display_options['fields']['field_tags']['id'] = 'field_tags';
+$handler->display->display_options['fields']['field_tags']['table'] = 'field_data_field_tags';
+$handler->display->display_options['fields']['field_tags']['field'] = 'field_tags';
+$handler->display->display_options['fields']['field_tags']['type'] = 'editable';
+$handler->display->display_options['fields']['field_tags']['settings'] = array(
+  'click_to_edit' => 1,
+  'click_to_edit_style' => 'button',
+  'empty_text' => '',
+  'fallback_format' => 'taxonomy_term_reference_plain',
+);
+$handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
+/* Field: Registration: Notes (editable) */
+$handler->display->display_options['fields']['field_notes_editable']['id'] = 'field_notes_editable';
+$handler->display->display_options['fields']['field_notes_editable']['table'] = 'field_data_field_notes';
+$handler->display->display_options['fields']['field_notes_editable']['field'] = 'field_notes_editable';
+$handler->display->display_options['fields']['field_notes_editable']['label'] = 'Notes';
+$handler->display->display_options['fields']['field_notes_editable']['type'] = 'editable';
+$handler->display->display_options['fields']['field_notes_editable']['settings'] = array(
+  'click_to_edit' => 1,
+  'click_to_edit_style' => 'button',
+  'empty_text' => '',
+  'fallback_format' => 'text_plain',
+);
+$handler->display->display_options['fields']['field_notes_editable']['widget_type'] = '0';
+$handler->display->display_options['fields']['field_notes_editable']['suppress_label'] = 1;
+$handler->display->display_options['fields']['field_notes_editable']['suppress_description'] = 1;
+/* Field: Commerce Line Item: Order ID */
+$handler->display->display_options['fields']['order_id']['id'] = 'order_id';
+$handler->display->display_options['fields']['order_id']['table'] = 'commerce_line_item';
+$handler->display->display_options['fields']['order_id']['field'] = 'order_id';
+$handler->display->display_options['fields']['order_id']['relationship'] = 'reverse_registration_commerce_reg_commerce_line_item';
+$handler->display->display_options['fields']['order_id']['label'] = 'Order';
+$handler->display->display_options['fields']['order_id']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['order_id']['alter']['path'] = 'admin/commerce/orders/[order_id]';
+/* Field: Link to Messages */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['ui_name'] = 'Link to Messages';
+$handler->display->display_options['fields']['nothing']['label'] = 'Messages';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Msg';
+$handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['nothing']['alter']['path'] = 'admin/entry_management/messages/[uid]';
+/* Filter criterion: CurrentYear */
+$handler->display->display_options['filters']['php']['id'] = 'php';
+$handler->display->display_options['filters']['php']['table'] = 'views';
+$handler->display->display_options['filters']['php']['field'] = 'php';
+$handler->display->display_options['filters']['php']['ui_name'] = 'CurrentYear';
+$handler->display->display_options['filters']['php']['use_php_setup'] = 0;
+$handler->display->display_options['filters']['php']['php_filter'] = '    $race_date = getdate(strtotime("first Saturday of December"));
+    $race_year = $race_date[\'year\'];
+    $reg_year = getdate($row->created)[\'year\'];
+    if ($reg_year < $race_year ) {
+        return TRUE; // Rows where this returns true are not displayed
+    }
+    else {
+        return FALSE;
+    }';
+/* Filter criterion: Event */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'registration';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['ui_name'] = 'Event';
+$handler->display->display_options['filters']['type']['exposed'] = TRUE;
+$handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+$handler->display->display_options['filters']['type']['expose']['label'] = 'Event';
+$handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+$handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+$handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Name */
+$handler->display->display_options['filters']['field_name_address_name_line']['id'] = 'field_name_address_name_line';
+$handler->display->display_options['filters']['field_name_address_name_line']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['filters']['field_name_address_name_line']['field'] = 'field_name_address_name_line';
+$handler->display->display_options['filters']['field_name_address_name_line']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_name_address_name_line']['ui_name'] = 'Name';
+$handler->display->display_options['filters']['field_name_address_name_line']['operator'] = 'contains';
+$handler->display->display_options['filters']['field_name_address_name_line']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['operator_id'] = 'field_name_address_name_line_op';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['label'] = 'Name';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['operator'] = 'field_name_address_name_line_op';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['identifier'] = 'field_name_address_name_line';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Registration: State entity */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'registration';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  'waitlist' => 'waitlist',
+  'invited' => 'invited',
+  'complete' => 'complete',
+  'paid' => 'paid',
+  'canceled' => 'canceled',
+);
+$handler->display->display_options['filters']['state']['exposed'] = TRUE;
+$handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+$handler->display->display_options['filters']['state']['expose']['label'] = 'Entry Status';
+$handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+$handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+$handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
+/* Filter criterion: Registration: Runner Type (field_runner_type) */
+$handler->display->display_options['filters']['field_runner_type_tid']['id'] = 'field_runner_type_tid';
+$handler->display->display_options['filters']['field_runner_type_tid']['table'] = 'field_data_field_runner_type';
+$handler->display->display_options['filters']['field_runner_type_tid']['field'] = 'field_runner_type_tid';
+$handler->display->display_options['filters']['field_runner_type_tid']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['operator_id'] = 'field_runner_type_tid_op';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['label'] = 'Runner Type';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['operator'] = 'field_runner_type_tid_op';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['identifier'] = 'field_runner_type_tid';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['field_runner_type_tid']['type'] = 'select';
+$handler->display->display_options['filters']['field_runner_type_tid']['vocabulary'] = 'runner_type';
+$handler->display->display_options['filters']['field_runner_type_tid']['error_message'] = FALSE;
+/* Filter criterion: Registration: Tags (field_tags) */
+$handler->display->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
+$handler->display->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
+$handler->display->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
+$handler->display->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
+$handler->display->display_options['filters']['field_tags_tid']['expose']['label'] = 'Tags';
+$handler->display->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
+$handler->display->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'field_tags_tid';
+$handler->display->display_options['filters']['field_tags_tid']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['field_tags_tid']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['field_tags_tid']['type'] = 'select';
+$handler->display->display_options['filters']['field_tags_tid']['vocabulary'] = 'registrationtag';
+$handler->display->display_options['filters']['field_tags_tid']['error_message'] = FALSE;
+/* Filter criterion: User: E-mail */
+$handler->display->display_options['filters']['mail']['id'] = 'mail';
+$handler->display->display_options['filters']['mail']['table'] = 'users';
+$handler->display->display_options['filters']['mail']['field'] = 'mail';
+$handler->display->display_options['filters']['mail']['relationship'] = 'user_uid';
+$handler->display->display_options['filters']['mail']['operator'] = 'contains';
+$handler->display->display_options['filters']['mail']['exposed'] = TRUE;
+$handler->display->display_options['filters']['mail']['expose']['operator_id'] = 'mail_op';
+$handler->display->display_options['filters']['mail']['expose']['label'] = 'E-mail';
+$handler->display->display_options['filters']['mail']['expose']['operator'] = 'mail_op';
+$handler->display->display_options['filters']['mail']['expose']['identifier'] = 'mail';
+$handler->display->display_options['filters']['mail']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Registration: Notes (field_notes) */
+$handler->display->display_options['filters']['field_notes_value']['id'] = 'field_notes_value';
+$handler->display->display_options['filters']['field_notes_value']['table'] = 'field_data_field_notes';
+$handler->display->display_options['filters']['field_notes_value']['field'] = 'field_notes_value';
+$handler->display->display_options['filters']['field_notes_value']['operator'] = 'contains';
+$handler->display->display_options['filters']['field_notes_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_notes_value']['expose']['operator_id'] = 'field_notes_value_op';
+$handler->display->display_options['filters']['field_notes_value']['expose']['label'] = 'Notes';
+$handler->display->display_options['filters']['field_notes_value']['expose']['operator'] = 'field_notes_value_op';
+$handler->display->display_options['filters']['field_notes_value']['expose']['identifier'] = 'field_notes_value';
+$handler->display->display_options['filters']['field_notes_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Registration: Registration ID */
+$handler->display->display_options['filters']['registration_id']['id'] = 'registration_id';
+$handler->display->display_options['filters']['registration_id']['table'] = 'registration';
+$handler->display->display_options['filters']['registration_id']['field'] = 'registration_id';
+$handler->display->display_options['filters']['registration_id']['exposed'] = TRUE;
+$handler->display->display_options['filters']['registration_id']['expose']['operator_id'] = 'registration_id_op';
+$handler->display->display_options['filters']['registration_id']['expose']['label'] = 'Entry #';
+$handler->display->display_options['filters']['registration_id']['expose']['operator'] = 'registration_id_op';
+$handler->display->display_options['filters']['registration_id']['expose']['identifier'] = 'registration_id';
+$handler->display->display_options['filters']['registration_id']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Commerce Line Item: Order ID */
+$handler->display->display_options['filters']['order_id']['id'] = 'order_id';
+$handler->display->display_options['filters']['order_id']['table'] = 'commerce_line_item';
+$handler->display->display_options['filters']['order_id']['field'] = 'order_id';
+$handler->display->display_options['filters']['order_id']['relationship'] = 'reverse_registration_commerce_reg_commerce_line_item';
+$handler->display->display_options['filters']['order_id']['exposed'] = TRUE;
+$handler->display->display_options['filters']['order_id']['expose']['operator_id'] = 'order_id_op';
+$handler->display->display_options['filters']['order_id']['expose']['label'] = 'Order #';
+$handler->display->display_options['filters']['order_id']['expose']['operator'] = 'order_id_op';
+$handler->display->display_options['filters']['order_id']['expose']['identifier'] = 'order_id';
+$handler->display->display_options['filters']['order_id']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+
+/* Display: Page */
+$handler = $view->new_display('page', 'Page', 'page');
+$handler->display->display_options['path'] = 'admin/entry_management/entries';
+$handler->display->display_options['menu']['type'] = 'default tab';
+$handler->display->display_options['menu']['title'] = 'Entries';
+$handler->display->display_options['menu']['description'] = 'Manage Entries';
+$handler->display->display_options['menu']['weight'] = '-10';
+$handler->display->display_options['menu']['name'] = 'menu-event-management';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
+$handler->display->display_options['tab_options']['type'] = 'normal';
+$handler->display->display_options['tab_options']['title'] = 'Manage Events';
+$handler->display->display_options['tab_options']['description'] = 'Event entry management';
+$handler->display->display_options['tab_options']['weight'] = '0';
+$handler->display->display_options['tab_options']['name'] = 'menu-event-management';

@@ -1,0 +1,341 @@
+$view = new view();
+$view->name = 'keplerusers';
+$view->description = 'List of Kepler Users';
+$view->tag = 'norwegian.blue, event entry';
+$view->base_table = 'users';
+$view->human_name = 'KeplerUsers';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'KeplerUsers';
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['access']['type'] = 'role';
+$handler->display->display_options['access']['role'] = array(
+  3 => '3',
+  6 => '6',
+);
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['pager']['options']['items_per_page'] = '50';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['pager']['options']['id'] = '0';
+$handler->display->display_options['pager']['options']['quantity'] = '9';
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'name' => 'name',
+  'field_name_address_name_line' => 'field_name_address_name_line',
+  'field_gender' => 'field_gender',
+  'field_name_address_country' => 'field_name_address_country',
+  'rid' => 'rid',
+  'field_running_profile' => 'field_running_profile',
+  'field_commentary' => 'field_commentary',
+  'mail' => 'mail',
+  'created' => 'created',
+);
+$handler->display->display_options['style_options']['default'] = 'created';
+$handler->display->display_options['style_options']['info'] = array(
+  'name' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_name_address_name_line' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_gender' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_name_address_country' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'rid' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_running_profile' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_commentary' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'mail' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'created' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'desc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+/* Header: Global: View area */
+$handler->display->display_options['header']['view']['id'] = 'view';
+$handler->display->display_options['header']['view']['table'] = 'views';
+$handler->display->display_options['header']['view']['field'] = 'view';
+$handler->display->display_options['header']['view']['label'] = 'Totals';
+$handler->display->display_options['header']['view']['view_to_insert'] = 'kepleruserscount:default';
+/* Header: Global: View area */
+$handler->display->display_options['header']['view_1']['id'] = 'view_1';
+$handler->display->display_options['header']['view_1']['table'] = 'views';
+$handler->display->display_options['header']['view_1']['field'] = 'view';
+$handler->display->display_options['header']['view_1']['label'] = 'Users who haven\'t validated';
+$handler->display->display_options['header']['view_1']['view_to_insert'] = 'kepleruserscount:attachment_1';
+/* Relationship: User: Profile */
+$handler->display->display_options['relationships']['profile']['id'] = 'profile';
+$handler->display->display_options['relationships']['profile']['table'] = 'users';
+$handler->display->display_options['relationships']['profile']['field'] = 'profile';
+$handler->display->display_options['relationships']['profile']['required'] = TRUE;
+$handler->display->display_options['relationships']['profile']['bundle_types'] = array(
+  'main' => 'main',
+);
+/* Field: User: Name */
+$handler->display->display_options['fields']['name']['id'] = 'name';
+$handler->display->display_options['fields']['name']['table'] = 'users';
+$handler->display->display_options['fields']['name']['field'] = 'name';
+$handler->display->display_options['fields']['name']['label'] = 'UserName';
+$handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+/* Field: Profile: Name &amp; Address - Full name */
+$handler->display->display_options['fields']['field_name_address_name_line']['id'] = 'field_name_address_name_line';
+$handler->display->display_options['fields']['field_name_address_name_line']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_name_line']['field'] = 'field_name_address_name_line';
+$handler->display->display_options['fields']['field_name_address_name_line']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_name_line']['label'] = 'Name';
+/* Field: Profile: Gender */
+$handler->display->display_options['fields']['field_gender']['id'] = 'field_gender';
+$handler->display->display_options['fields']['field_gender']['table'] = 'field_data_field_gender';
+$handler->display->display_options['fields']['field_gender']['field'] = 'field_gender';
+$handler->display->display_options['fields']['field_gender']['relationship'] = 'profile';
+/* Field: Profile: Name &amp; Address - Country */
+$handler->display->display_options['fields']['field_name_address_country']['id'] = 'field_name_address_country';
+$handler->display->display_options['fields']['field_name_address_country']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_country']['field'] = 'field_name_address_country';
+$handler->display->display_options['fields']['field_name_address_country']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_country']['label'] = 'Country';
+$handler->display->display_options['fields']['field_name_address_country']['display_name'] = 1;
+/* Field: User: Roles */
+$handler->display->display_options['fields']['rid']['id'] = 'rid';
+$handler->display->display_options['fields']['rid']['table'] = 'users_roles';
+$handler->display->display_options['fields']['rid']['field'] = 'rid';
+/* Field: Profile: Running profile */
+$handler->display->display_options['fields']['field_running_profile']['id'] = 'field_running_profile';
+$handler->display->display_options['fields']['field_running_profile']['table'] = 'field_data_field_running_profile';
+$handler->display->display_options['fields']['field_running_profile']['field'] = 'field_running_profile';
+$handler->display->display_options['fields']['field_running_profile']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_running_profile']['type'] = 'text_trimmed';
+$handler->display->display_options['fields']['field_running_profile']['settings'] = array(
+  'trim_length' => '128',
+);
+/* Field: Profile: Commentary */
+$handler->display->display_options['fields']['field_commentary']['id'] = 'field_commentary';
+$handler->display->display_options['fields']['field_commentary']['table'] = 'field_data_field_commentary';
+$handler->display->display_options['fields']['field_commentary']['field'] = 'field_commentary';
+$handler->display->display_options['fields']['field_commentary']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_commentary']['type'] = 'text_trimmed';
+$handler->display->display_options['fields']['field_commentary']['settings'] = array(
+  'trim_length' => '64',
+);
+/* Field: User: E-mail */
+$handler->display->display_options['fields']['mail']['id'] = 'mail';
+$handler->display->display_options['fields']['mail']['table'] = 'users';
+$handler->display->display_options['fields']['mail']['field'] = 'mail';
+/* Field: User: Created date */
+$handler->display->display_options['fields']['created']['id'] = 'created';
+$handler->display->display_options['fields']['created']['table'] = 'users';
+$handler->display->display_options['fields']['created']['field'] = 'created';
+$handler->display->display_options['fields']['created']['label'] = 'Member for';
+$handler->display->display_options['fields']['created']['date_format'] = 'raw time ago';
+$handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+/* Sort criterion: User: Created date */
+$handler->display->display_options['sorts']['created']['id'] = 'created';
+$handler->display->display_options['sorts']['created']['table'] = 'users';
+$handler->display->display_options['sorts']['created']['field'] = 'created';
+$handler->display->display_options['sorts']['created']['order'] = 'DESC';
+/* Filter criterion: User: Active */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'users';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = '1';
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: User: Roles */
+$handler->display->display_options['filters']['rid']['id'] = 'rid';
+$handler->display->display_options['filters']['rid']['table'] = 'users_roles';
+$handler->display->display_options['filters']['rid']['field'] = 'rid';
+$handler->display->display_options['filters']['rid']['value'] = array(
+  5 => '5',
+);
+/* Filter criterion: User: Roles */
+$handler->display->display_options['filters']['rid_1']['id'] = 'rid_1';
+$handler->display->display_options['filters']['rid_1']['table'] = 'users_roles';
+$handler->display->display_options['filters']['rid_1']['field'] = 'rid';
+$handler->display->display_options['filters']['rid_1']['operator'] = 'not';
+$handler->display->display_options['filters']['rid_1']['value'] = array(
+  6 => '6',
+);
+/* Filter criterion: User: Roles */
+$handler->display->display_options['filters']['rid_2']['id'] = 'rid_2';
+$handler->display->display_options['filters']['rid_2']['table'] = 'users_roles';
+$handler->display->display_options['filters']['rid_2']['field'] = 'rid';
+$handler->display->display_options['filters']['rid_2']['value'] = array(
+  4 => '4',
+  5 => '5',
+);
+$handler->display->display_options['filters']['rid_2']['exposed'] = TRUE;
+$handler->display->display_options['filters']['rid_2']['expose']['operator_id'] = 'rid_2_op';
+$handler->display->display_options['filters']['rid_2']['expose']['label'] = 'Roles';
+$handler->display->display_options['filters']['rid_2']['expose']['operator'] = 'rid_2_op';
+$handler->display->display_options['filters']['rid_2']['expose']['identifier'] = 'rid_2';
+$handler->display->display_options['filters']['rid_2']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['rid_2']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['rid_2']['expose']['reduce'] = TRUE;
+/* Filter criterion: Profile: Name &amp; Address - Full name */
+$handler->display->display_options['filters']['field_name_address_name_line']['id'] = 'field_name_address_name_line';
+$handler->display->display_options['filters']['field_name_address_name_line']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['filters']['field_name_address_name_line']['field'] = 'field_name_address_name_line';
+$handler->display->display_options['filters']['field_name_address_name_line']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_name_address_name_line']['operator'] = 'contains';
+$handler->display->display_options['filters']['field_name_address_name_line']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['operator_id'] = 'field_name_address_name_line_op';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['label'] = 'Name';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['operator'] = 'field_name_address_name_line_op';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['identifier'] = 'field_name_address_name_line';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+
+/* Display: Page */
+$handler = $view->new_display('page', 'Page', 'page');
+$handler->display->display_options['path'] = 'admin/keplerusers';
+$handler->display->display_options['menu']['type'] = 'normal';
+$handler->display->display_options['menu']['title'] = 'Kepler Users';
+$handler->display->display_options['menu']['description'] = 'Displays Kepler Users';
+$handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['name'] = 'management';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
+
+/* Display: Block */
+$handler = $view->new_display('block', 'Block', 'block');
+$handler->display->display_options['defaults']['pager'] = FALSE;
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['pager']['options']['items_per_page'] = '50';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['pager']['options']['id'] = '0';
+$handler->display->display_options['pager']['options']['quantity'] = '9';
+$handler->display->display_options['defaults']['style_plugin'] = FALSE;
+$handler->display->display_options['style_plugin'] = 'default';
+$handler->display->display_options['defaults']['style_options'] = FALSE;
+$handler->display->display_options['defaults']['row_plugin'] = FALSE;
+$handler->display->display_options['row_plugin'] = 'fields';
+$handler->display->display_options['defaults']['row_options'] = FALSE;
+
+/* Display: Data export */
+$handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+$handler->display->display_options['pager']['type'] = 'none';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: User: Name */
+$handler->display->display_options['fields']['name']['id'] = 'name';
+$handler->display->display_options['fields']['name']['table'] = 'users';
+$handler->display->display_options['fields']['name']['field'] = 'name';
+$handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+/* Field: Profile: Name &amp; Address - First name */
+$handler->display->display_options['fields']['field_name_address_first_name']['id'] = 'field_name_address_first_name';
+$handler->display->display_options['fields']['field_name_address_first_name']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_first_name']['field'] = 'field_name_address_first_name';
+$handler->display->display_options['fields']['field_name_address_first_name']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_first_name']['label'] = 'First name';
+/* Field: Profile: Name &amp; Address - Full name */
+$handler->display->display_options['fields']['field_name_address_name_line']['id'] = 'field_name_address_name_line';
+$handler->display->display_options['fields']['field_name_address_name_line']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_name_line']['field'] = 'field_name_address_name_line';
+$handler->display->display_options['fields']['field_name_address_name_line']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_name_line']['label'] = 'Name';
+/* Field: User: E-mail */
+$handler->display->display_options['fields']['mail']['id'] = 'mail';
+$handler->display->display_options['fields']['mail']['table'] = 'users';
+$handler->display->display_options['fields']['mail']['field'] = 'mail';
+/* Field: User: Roles */
+$handler->display->display_options['fields']['rid']['id'] = 'rid';
+$handler->display->display_options['fields']['rid']['table'] = 'users_roles';
+$handler->display->display_options['fields']['rid']['field'] = 'rid';
+/* Field: User: Created date */
+$handler->display->display_options['fields']['created']['id'] = 'created';
+$handler->display->display_options['fields']['created']['table'] = 'users';
+$handler->display->display_options['fields']['created']['field'] = 'created';
+$handler->display->display_options['fields']['created']['label'] = 'Member for';
+$handler->display->display_options['fields']['created']['date_format'] = 'raw time ago';
+$handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: User: Active */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'users';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = '1';
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: User: Roles */
+$handler->display->display_options['filters']['rid']['id'] = 'rid';
+$handler->display->display_options['filters']['rid']['table'] = 'users_roles';
+$handler->display->display_options['filters']['rid']['field'] = 'rid';
+$handler->display->display_options['filters']['rid']['value'] = array(
+  4 => '4',
+);
+/* Filter criterion: User: Roles */
+$handler->display->display_options['filters']['rid_1']['id'] = 'rid_1';
+$handler->display->display_options['filters']['rid_1']['table'] = 'users_roles';
+$handler->display->display_options['filters']['rid_1']['field'] = 'rid';
+$handler->display->display_options['filters']['rid_1']['operator'] = 'not';
+$handler->display->display_options['filters']['rid_1']['value'] = array(
+  6 => '6',
+);
+$handler->display->display_options['path'] = 'export/invalidmembers.csv';

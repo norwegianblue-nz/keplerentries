@@ -1,0 +1,382 @@
+$view = new view();
+$view->name = 'merchandise_order_items';
+$view->description = 'Merchandise data export';
+$view->tag = 'norwegian.blue, event entry';
+$view->base_table = 'commerce_line_item';
+$view->human_name = 'Merchandise Order Items';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'Merchandise Order Totals';
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['access']['type'] = 'none';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['pager']['options']['items_per_page'] = '100';
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'line_item_id' => 'line_item_id',
+  'line_item_label' => 'line_item_label',
+  'quantity' => 'quantity',
+  'line_item_title' => 'line_item_title',
+  'status' => 'status',
+  'name' => 'name',
+  'uid' => 'uid',
+  'field_name_address_name_line' => 'field_name_address_name_line',
+  'field_year' => 'field_year',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'line_item_id' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'line_item_label' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'quantity' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'line_item_title' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'status' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'name' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'uid' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_name_address_name_line' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_year' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+/* Relationship: Commerce Line Item: Order ID */
+$handler->display->display_options['relationships']['order_id']['id'] = 'order_id';
+$handler->display->display_options['relationships']['order_id']['table'] = 'commerce_line_item';
+$handler->display->display_options['relationships']['order_id']['field'] = 'order_id';
+/* Relationship: Commerce Order: Owner */
+$handler->display->display_options['relationships']['uid']['id'] = 'uid';
+$handler->display->display_options['relationships']['uid']['table'] = 'commerce_order';
+$handler->display->display_options['relationships']['uid']['field'] = 'uid';
+$handler->display->display_options['relationships']['uid']['relationship'] = 'order_id';
+/* Relationship: User: Profile */
+$handler->display->display_options['relationships']['profile']['id'] = 'profile';
+$handler->display->display_options['relationships']['profile']['table'] = 'users';
+$handler->display->display_options['relationships']['profile']['field'] = 'profile';
+$handler->display->display_options['relationships']['profile']['relationship'] = 'uid';
+/* Relationship: User: Registration */
+$handler->display->display_options['relationships']['registration']['id'] = 'registration';
+$handler->display->display_options['relationships']['registration']['table'] = 'users';
+$handler->display->display_options['relationships']['registration']['field'] = 'registration';
+$handler->display->display_options['relationships']['registration']['relationship'] = 'uid';
+/* Relationship: Race Numbers: Registration_ID */
+$handler->display->display_options['relationships']['RegID']['id'] = 'RegID';
+$handler->display->display_options['relationships']['RegID']['table'] = 'RaceNumbers';
+$handler->display->display_options['relationships']['RegID']['field'] = 'RegID';
+$handler->display->display_options['relationships']['RegID']['relationship'] = 'registration';
+/* Field: Commerce Line Item: Line item ID */
+$handler->display->display_options['fields']['line_item_id']['id'] = 'line_item_id';
+$handler->display->display_options['fields']['line_item_id']['table'] = 'commerce_line_item';
+$handler->display->display_options['fields']['line_item_id']['field'] = 'line_item_id';
+$handler->display->display_options['fields']['line_item_id']['label'] = '';
+$handler->display->display_options['fields']['line_item_id']['exclude'] = TRUE;
+$handler->display->display_options['fields']['line_item_id']['element_label_colon'] = FALSE;
+/* Field: User: Uid */
+$handler->display->display_options['fields']['uid']['id'] = 'uid';
+$handler->display->display_options['fields']['uid']['table'] = 'users';
+$handler->display->display_options['fields']['uid']['field'] = 'uid';
+$handler->display->display_options['fields']['uid']['relationship'] = 'uid';
+/* Field: User: Name */
+$handler->display->display_options['fields']['name']['id'] = 'name';
+$handler->display->display_options['fields']['name']['table'] = 'users';
+$handler->display->display_options['fields']['name']['field'] = 'name';
+$handler->display->display_options['fields']['name']['relationship'] = 'uid';
+$handler->display->display_options['fields']['name']['label'] = 'KeplerName';
+/* Field: Profile: Name &amp; Address - First name */
+$handler->display->display_options['fields']['field_name_address_first_name']['id'] = 'field_name_address_first_name';
+$handler->display->display_options['fields']['field_name_address_first_name']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_first_name']['field'] = 'field_name_address_first_name';
+$handler->display->display_options['fields']['field_name_address_first_name']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_first_name']['exclude'] = TRUE;
+/* Field: Profile: Name &amp; Address - Last name */
+$handler->display->display_options['fields']['field_name_address_last_name']['id'] = 'field_name_address_last_name';
+$handler->display->display_options['fields']['field_name_address_last_name']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_last_name']['field'] = 'field_name_address_last_name';
+$handler->display->display_options['fields']['field_name_address_last_name']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_last_name']['label'] = '';
+$handler->display->display_options['fields']['field_name_address_last_name']['exclude'] = TRUE;
+$handler->display->display_options['fields']['field_name_address_last_name']['element_label_colon'] = FALSE;
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['label'] = 'First name';
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+$op = strtoupper($row->field_name_address_first_name);
+print $op;
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+$handler->display->display_options['fields']['php_1']['table'] = 'views';
+$handler->display->display_options['fields']['php_1']['field'] = 'php';
+$handler->display->display_options['fields']['php_1']['label'] = 'Last name';
+$handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_1']['php_output'] = '<?php
+$op = strtoupper($row->field_name_address_last_name);
+print $op;
+?>';
+$handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+/* Field: Profile: Name &amp; Address - Full name */
+$handler->display->display_options['fields']['field_name_address_name_line']['id'] = 'field_name_address_name_line';
+$handler->display->display_options['fields']['field_name_address_name_line']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['fields']['field_name_address_name_line']['field'] = 'field_name_address_name_line';
+$handler->display->display_options['fields']['field_name_address_name_line']['relationship'] = 'profile';
+$handler->display->display_options['fields']['field_name_address_name_line']['label'] = 'Name';
+$handler->display->display_options['fields']['field_name_address_name_line']['exclude'] = TRUE;
+/* Field: Commerce Line Item: Label */
+$handler->display->display_options['fields']['line_item_label']['id'] = 'line_item_label';
+$handler->display->display_options['fields']['line_item_label']['table'] = 'commerce_line_item';
+$handler->display->display_options['fields']['line_item_label']['field'] = 'line_item_label';
+/* Field: Commerce Line Item: Title */
+$handler->display->display_options['fields']['line_item_title']['id'] = 'line_item_title';
+$handler->display->display_options['fields']['line_item_title']['table'] = 'commerce_line_item';
+$handler->display->display_options['fields']['line_item_title']['field'] = 'line_item_title';
+/* Field: Commerce Line Item: Quantity */
+$handler->display->display_options['fields']['quantity']['id'] = 'quantity';
+$handler->display->display_options['fields']['quantity']['table'] = 'commerce_line_item';
+$handler->display->display_options['fields']['quantity']['field'] = 'quantity';
+$handler->display->display_options['fields']['quantity']['precision'] = '0';
+/* Field: Commerce Order: Order status */
+$handler->display->display_options['fields']['status']['id'] = 'status';
+$handler->display->display_options['fields']['status']['table'] = 'commerce_order';
+$handler->display->display_options['fields']['status']['field'] = 'status';
+$handler->display->display_options['fields']['status']['relationship'] = 'order_id';
+/* Field: Registration: State entity */
+$handler->display->display_options['fields']['state']['id'] = 'state';
+$handler->display->display_options['fields']['state']['table'] = 'registration';
+$handler->display->display_options['fields']['state']['field'] = 'state';
+$handler->display->display_options['fields']['state']['relationship'] = 'registration';
+$handler->display->display_options['fields']['state']['label'] = 'Entry Status';
+/* Field: Registration: Event Date */
+$handler->display->display_options['fields']['field_year']['id'] = 'field_year';
+$handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
+$handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+$handler->display->display_options['fields']['field_year']['relationship'] = 'registration';
+$handler->display->display_options['fields']['field_year']['settings'] = array(
+  'format_type' => 'yearonly',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Race Numbers: Race Number */
+$handler->display->display_options['fields']['racenum']['id'] = 'racenum';
+$handler->display->display_options['fields']['racenum']['table'] = 'RaceNumbers';
+$handler->display->display_options['fields']['racenum']['field'] = 'racenum';
+$handler->display->display_options['fields']['racenum']['relationship'] = 'registration';
+$handler->display->display_options['fields']['racenum']['label'] = 'Race#';
+$handler->display->display_options['fields']['racenum']['separator'] = '';
+/* Filter criterion: Commerce Line Item: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'commerce_line_item';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'product' => 'product',
+);
+/* Filter criterion: Registration: Event Date (field_year) */
+$handler->display->display_options['filters']['field_year_value']['id'] = 'field_year_value';
+$handler->display->display_options['filters']['field_year_value']['table'] = 'field_data_field_year';
+$handler->display->display_options['filters']['field_year_value']['field'] = 'field_year_value';
+$handler->display->display_options['filters']['field_year_value']['relationship'] = 'registration';
+$handler->display->display_options['filters']['field_year_value']['operator'] = 'contains';
+$handler->display->display_options['filters']['field_year_value']['value'] = '2016';
+$handler->display->display_options['filters']['field_year_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_year_value']['expose']['operator_id'] = 'field_year_value_op';
+$handler->display->display_options['filters']['field_year_value']['expose']['label'] = 'Year';
+$handler->display->display_options['filters']['field_year_value']['expose']['operator'] = 'field_year_value_op';
+$handler->display->display_options['filters']['field_year_value']['expose']['identifier'] = 'field_year_value';
+$handler->display->display_options['filters']['field_year_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+
+/* Display: Page */
+$handler = $view->new_display('page', 'Page', 'page');
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Commerce Line Item: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'commerce_line_item';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'product' => 'product',
+);
+/* Filter criterion: Registration: Event Date (field_year) */
+$handler->display->display_options['filters']['field_year_value']['id'] = 'field_year_value';
+$handler->display->display_options['filters']['field_year_value']['table'] = 'field_data_field_year';
+$handler->display->display_options['filters']['field_year_value']['field'] = 'field_year_value';
+$handler->display->display_options['filters']['field_year_value']['relationship'] = 'registration';
+$handler->display->display_options['filters']['field_year_value']['operator'] = 'contains';
+$handler->display->display_options['filters']['field_year_value']['value'] = '2016';
+$handler->display->display_options['filters']['field_year_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_year_value']['expose']['operator_id'] = 'field_year_value_op';
+$handler->display->display_options['filters']['field_year_value']['expose']['label'] = 'Year';
+$handler->display->display_options['filters']['field_year_value']['expose']['operator'] = 'field_year_value_op';
+$handler->display->display_options['filters']['field_year_value']['expose']['identifier'] = 'field_year_value';
+$handler->display->display_options['filters']['field_year_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Profile: Name &amp; Address - Full name */
+$handler->display->display_options['filters']['field_name_address_name_line']['id'] = 'field_name_address_name_line';
+$handler->display->display_options['filters']['field_name_address_name_line']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['filters']['field_name_address_name_line']['field'] = 'field_name_address_name_line';
+$handler->display->display_options['filters']['field_name_address_name_line']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_name_address_name_line']['operator'] = 'contains';
+$handler->display->display_options['filters']['field_name_address_name_line']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['operator_id'] = 'field_name_address_name_line_op';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['label'] = 'Name';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['operator'] = 'field_name_address_name_line_op';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['identifier'] = 'field_name_address_name_line';
+$handler->display->display_options['filters']['field_name_address_name_line']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['path'] = 'admin/entry_management/merchandise-order-items';
+$handler->display->display_options['menu']['type'] = 'tab';
+$handler->display->display_options['menu']['title'] = 'Merchandise';
+$handler->display->display_options['menu']['description'] = 'Summary of Orders';
+$handler->display->display_options['menu']['weight'] = '6';
+$handler->display->display_options['menu']['name'] = 'menu-event-management';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
+
+/* Display: Merchandise Order Totals */
+$handler = $view->new_display('page', 'Merchandise Order Totals', 'page_1');
+$handler->display->display_options['defaults']['group_by'] = FALSE;
+$handler->display->display_options['group_by'] = TRUE;
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Commerce Line Item: Label */
+$handler->display->display_options['fields']['line_item_label']['id'] = 'line_item_label';
+$handler->display->display_options['fields']['line_item_label']['table'] = 'commerce_line_item';
+$handler->display->display_options['fields']['line_item_label']['field'] = 'line_item_label';
+/* Field: Commerce Line Item: Quantity */
+$handler->display->display_options['fields']['quantity']['id'] = 'quantity';
+$handler->display->display_options['fields']['quantity']['table'] = 'commerce_line_item';
+$handler->display->display_options['fields']['quantity']['field'] = 'quantity';
+$handler->display->display_options['fields']['quantity']['group_type'] = 'sum';
+$handler->display->display_options['fields']['quantity']['precision'] = '0';
+$handler->display->display_options['defaults']['sorts'] = FALSE;
+/* Sort criterion: Commerce Line Item: Label */
+$handler->display->display_options['sorts']['line_item_label']['id'] = 'line_item_label';
+$handler->display->display_options['sorts']['line_item_label']['table'] = 'commerce_line_item';
+$handler->display->display_options['sorts']['line_item_label']['field'] = 'line_item_label';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Commerce Line Item: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'commerce_line_item';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'product' => 'product',
+);
+/* Filter criterion: Commerce Order: Order status */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'commerce_order';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['relationship'] = 'order_id';
+$handler->display->display_options['filters']['status']['value'] = array(
+  'commerce_paymentreceived' => 'commerce_paymentreceived',
+);
+/* Filter criterion: Registration: Event Date (field_year) */
+$handler->display->display_options['filters']['field_year_value']['id'] = 'field_year_value';
+$handler->display->display_options['filters']['field_year_value']['table'] = 'field_data_field_year';
+$handler->display->display_options['filters']['field_year_value']['field'] = 'field_year_value';
+$handler->display->display_options['filters']['field_year_value']['relationship'] = 'registration';
+$handler->display->display_options['filters']['field_year_value']['operator'] = 'contains';
+$handler->display->display_options['filters']['field_year_value']['value'] = '2016';
+$handler->display->display_options['filters']['field_year_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_year_value']['expose']['operator_id'] = 'field_year_value_op';
+$handler->display->display_options['filters']['field_year_value']['expose']['label'] = 'Year';
+$handler->display->display_options['filters']['field_year_value']['expose']['operator'] = 'field_year_value_op';
+$handler->display->display_options['filters']['field_year_value']['expose']['identifier'] = 'field_year_value';
+$handler->display->display_options['filters']['field_year_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['path'] = 'admin/entry_management/order_totals';
+
+/* Display: Merchandise Order Details */
+$handler = $view->new_display('views_data_export', 'Merchandise Order Details', 'views_data_export_1');
+$handler->display->display_options['defaults']['title'] = FALSE;
+$handler->display->display_options['title'] = 'Merchandise Order Details';
+$handler->display->display_options['pager']['type'] = 'none';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+$handler->display->display_options['path'] = 'admin/data_export/merchandise_details.csv';
+$handler->display->display_options['sitename_title'] = 0;

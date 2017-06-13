@@ -57,13 +57,13 @@ diff -uNr registration.old/includes/registration.forms.inc registration/includes
 +  // Ensure agelimit is a non-negative integer. - norwegian.blue 20170603
 +  $agelimit = $form_state['values']['settings']['minage'];
 +  if (!is_numeric($agelimit) || ((int) $agelimit != $agelimit) || ($agelimit < 0)) {
-+    form_set_error('agelimit', t('"Minimum Age" must be a positive integer or 0 for unlimited.'));
++    form_set_error('minage', t('"Minimum Age" must be a positive integer or 0 for unlimited.'));
 +  }
 +
 +  // Ensure oldage is a non-negative integer. - norwegian.blue 20170603
 +  $maxage = $form_state['values']['settings']['oldage'];
-+  if (!is_numeric($maxage) || ((int) $maxage != $agelimit) || ($maxage < 0)) {
-+    form_set_error('agelimit', t('"Warning Age" must be a positive integer or 0 for no warning.'));
++  if (!is_numeric($maxage) || ((int) $maxage != $maxage) || ($maxage < 0)) {
++    form_set_error('oldage', t('"Warning Age" must be a positive integer or 0 for no warning.'));
 +  }
 +
    // Ensure slot limit is a non-negative integer.

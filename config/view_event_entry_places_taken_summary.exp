@@ -1,0 +1,886 @@
+$view = new view();
+$view->name = 'event_entry_places_taken_summary';
+$view->description = '';
+$view->tag = 'norwegian.blue, event entry';
+$view->base_table = 'registration';
+$view->human_name = 'Event entry: Places taken summary';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['group_by'] = TRUE;
+$handler->display->display_options['access']['type'] = 'none';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'type',
+    'rendered' => 1,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['style_options']['columns'] = array(
+  'registration_id' => 'registration_id',
+  'type' => 'type',
+  'count' => 'count',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'registration_id' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'type' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'count' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+/* Relationship: Registration: Registration to Node */
+$handler->display->display_options['relationships']['registration_related_node']['id'] = 'registration_related_node';
+$handler->display->display_options['relationships']['registration_related_node']['table'] = 'registration';
+$handler->display->display_options['relationships']['registration_related_node']['field'] = 'registration_related_node';
+/* Relationship: Registration: User */
+$handler->display->display_options['relationships']['user_uid']['id'] = 'user_uid';
+$handler->display->display_options['relationships']['user_uid']['table'] = 'registration';
+$handler->display->display_options['relationships']['user_uid']['field'] = 'user_uid';
+$handler->display->display_options['relationships']['user_uid']['required'] = TRUE;
+/* Relationship: User: Profile */
+$handler->display->display_options['relationships']['profile']['id'] = 'profile';
+$handler->display->display_options['relationships']['profile']['table'] = 'users';
+$handler->display->display_options['relationships']['profile']['field'] = 'profile';
+$handler->display->display_options['relationships']['profile']['relationship'] = 'user_uid';
+$handler->display->display_options['relationships']['profile']['required'] = TRUE;
+$handler->display->display_options['relationships']['profile']['bundle_types'] = array(
+  'main' => 'main',
+);
+/* Field: Registration: Registration type */
+$handler->display->display_options['fields']['type']['id'] = 'type';
+$handler->display->display_options['fields']['type']['table'] = 'registration';
+$handler->display->display_options['fields']['type']['field'] = 'type';
+$handler->display->display_options['fields']['type']['exclude'] = TRUE;
+$handler->display->display_options['fields']['type']['alter']['alter_text'] = TRUE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['relationship'] = 'registration_related_node';
+$handler->display->display_options['fields']['title']['label'] = 'Kepler Challenge Totals';
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Status';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Total';
+/* Field: SUM(Registration: Slots consumed) */
+$handler->display->display_options['fields']['count']['id'] = 'count';
+$handler->display->display_options['fields']['count']['table'] = 'registration';
+$handler->display->display_options['fields']['count']['field'] = 'count';
+$handler->display->display_options['fields']['count']['group_type'] = 'sum';
+$handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+/* Filter criterion: Registration: State entity */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'registration';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  'waitlist' => 'waitlist',
+  'complete' => 'complete',
+  'paid' => 'paid',
+);
+$handler->display->display_options['filters']['state']['exposed'] = TRUE;
+$handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+$handler->display->display_options['filters']['state']['expose']['label'] = 'State entity';
+$handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+$handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+/* Filter criterion: Registration: Registration type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'registration';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'keplerreg' => 'keplerreg',
+);
+/* Filter criterion: Profile: Gender (field_gender) */
+$handler->display->display_options['filters']['field_gender_value']['id'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['table'] = 'field_data_field_gender';
+$handler->display->display_options['filters']['field_gender_value']['field'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_gender_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator_id'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['label'] = 'Gender';
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['identifier'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+
+/* Display: Kepler Complete */
+$handler = $view->new_display('attachment', 'Kepler Complete', 'attachment_1');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Registration: Registration type */
+$handler->display->display_options['fields']['type']['id'] = 'type';
+$handler->display->display_options['fields']['type']['table'] = 'registration';
+$handler->display->display_options['fields']['type']['field'] = 'type';
+$handler->display->display_options['fields']['type']['exclude'] = TRUE;
+$handler->display->display_options['fields']['type']['alter']['alter_text'] = TRUE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['relationship'] = 'registration_related_node';
+$handler->display->display_options['fields']['title']['label'] = 'Kepler Challenge Totals';
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Status';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Entries';
+/* Field: SUM(Registration: Slots consumed) */
+$handler->display->display_options['fields']['count']['id'] = 'count';
+$handler->display->display_options['fields']['count']['table'] = 'registration';
+$handler->display->display_options['fields']['count']['field'] = 'count';
+$handler->display->display_options['fields']['count']['group_type'] = 'sum';
+$handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Registration: State entity */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'registration';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  'complete' => 'complete',
+  'paid' => 'paid',
+);
+/* Filter criterion: Registration: Registration type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'registration';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'keplerreg' => 'keplerreg',
+);
+/* Filter criterion: Profile: Gender (field_gender) */
+$handler->display->display_options['filters']['field_gender_value']['id'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['table'] = 'field_data_field_gender';
+$handler->display->display_options['filters']['field_gender_value']['field'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_gender_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator_id'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['label'] = 'Gender (field_gender)';
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['identifier'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['displays'] = array(
+  'default' => 'default',
+  'page_1' => 'page_1',
+);
+$handler->display->display_options['attachment_position'] = 'after';
+$handler->display->display_options['inherit_exposed_filters'] = TRUE;
+
+/* Display: Kepler Waitlist */
+$handler = $view->new_display('attachment', 'Kepler Waitlist', 'attachment_2');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Registration: Registration type */
+$handler->display->display_options['fields']['type']['id'] = 'type';
+$handler->display->display_options['fields']['type']['table'] = 'registration';
+$handler->display->display_options['fields']['type']['field'] = 'type';
+$handler->display->display_options['fields']['type']['exclude'] = TRUE;
+$handler->display->display_options['fields']['type']['alter']['alter_text'] = TRUE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['relationship'] = 'registration_related_node';
+$handler->display->display_options['fields']['title']['label'] = 'Event';
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Status';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Waitlist';
+/* Field: SUM(Registration: Slots consumed) */
+$handler->display->display_options['fields']['count']['id'] = 'count';
+$handler->display->display_options['fields']['count']['table'] = 'registration';
+$handler->display->display_options['fields']['count']['field'] = 'count';
+$handler->display->display_options['fields']['count']['group_type'] = 'sum';
+$handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Registration: State entity */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'registration';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  'waitlist' => 'waitlist',
+  'invited' => 'invited',
+);
+/* Filter criterion: Registration: Registration type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'registration';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'keplerreg' => 'keplerreg',
+);
+/* Filter criterion: Profile: Gender (field_gender) */
+$handler->display->display_options['filters']['field_gender_value']['id'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['table'] = 'field_data_field_gender';
+$handler->display->display_options['filters']['field_gender_value']['field'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_gender_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator_id'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['label'] = 'Gender (field_gender)';
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['identifier'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['displays'] = array(
+  'default' => 'default',
+  'page_1' => 'page_1',
+);
+$handler->display->display_options['attachment_position'] = 'after';
+$handler->display->display_options['inherit_exposed_filters'] = TRUE;
+
+/* Display: Grunt Total */
+$handler = $view->new_display('attachment', 'Grunt Total', 'attachment_3');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Registration: Registration type */
+$handler->display->display_options['fields']['type']['id'] = 'type';
+$handler->display->display_options['fields']['type']['table'] = 'registration';
+$handler->display->display_options['fields']['type']['field'] = 'type';
+$handler->display->display_options['fields']['type']['exclude'] = TRUE;
+$handler->display->display_options['fields']['type']['alter']['alter_text'] = TRUE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['relationship'] = 'registration_related_node';
+$handler->display->display_options['fields']['title']['label'] = 'Luxmore Grunt Totals';
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Status';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Total';
+/* Field: SUM(Registration: Slots consumed) */
+$handler->display->display_options['fields']['count']['id'] = 'count';
+$handler->display->display_options['fields']['count']['table'] = 'registration';
+$handler->display->display_options['fields']['count']['field'] = 'count';
+$handler->display->display_options['fields']['count']['group_type'] = 'sum';
+$handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Registration: State entity */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'registration';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  'waitlist' => 'waitlist',
+  'complete' => 'complete',
+  'paid' => 'paid',
+);
+/* Filter criterion: Registration: Registration type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'registration';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'gruntreg' => 'gruntreg',
+);
+$handler->display->display_options['displays'] = array(
+  'default' => 'default',
+);
+$handler->display->display_options['attachment_position'] = 'after';
+
+/* Display: Grunt Complete */
+$handler = $view->new_display('attachment', 'Grunt Complete', 'attachment_4');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Registration: Registration type */
+$handler->display->display_options['fields']['type']['id'] = 'type';
+$handler->display->display_options['fields']['type']['table'] = 'registration';
+$handler->display->display_options['fields']['type']['field'] = 'type';
+$handler->display->display_options['fields']['type']['exclude'] = TRUE;
+$handler->display->display_options['fields']['type']['alter']['alter_text'] = TRUE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['relationship'] = 'registration_related_node';
+$handler->display->display_options['fields']['title']['label'] = 'Event';
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Status';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Entries';
+/* Field: SUM(Registration: Slots consumed) */
+$handler->display->display_options['fields']['count']['id'] = 'count';
+$handler->display->display_options['fields']['count']['table'] = 'registration';
+$handler->display->display_options['fields']['count']['field'] = 'count';
+$handler->display->display_options['fields']['count']['group_type'] = 'sum';
+$handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Registration: State entity */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'registration';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  'complete' => 'complete',
+  'paid' => 'paid',
+);
+/* Filter criterion: Registration: Registration type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'registration';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'gruntreg' => 'gruntreg',
+);
+$handler->display->display_options['displays'] = array(
+  'default' => 'default',
+);
+$handler->display->display_options['attachment_position'] = 'after';
+
+/* Display: Grunt Waitlist */
+$handler = $view->new_display('attachment', 'Grunt Waitlist', 'attachment_5');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Registration: Registration type */
+$handler->display->display_options['fields']['type']['id'] = 'type';
+$handler->display->display_options['fields']['type']['table'] = 'registration';
+$handler->display->display_options['fields']['type']['field'] = 'type';
+$handler->display->display_options['fields']['type']['exclude'] = TRUE;
+$handler->display->display_options['fields']['type']['alter']['alter_text'] = TRUE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['relationship'] = 'registration_related_node';
+$handler->display->display_options['fields']['title']['label'] = 'Event';
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Status';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Waitlist';
+/* Field: SUM(Registration: Slots consumed) */
+$handler->display->display_options['fields']['count']['id'] = 'count';
+$handler->display->display_options['fields']['count']['table'] = 'registration';
+$handler->display->display_options['fields']['count']['field'] = 'count';
+$handler->display->display_options['fields']['count']['group_type'] = 'sum';
+$handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Registration: State entity */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'registration';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  'waitlist' => 'waitlist',
+);
+/* Filter criterion: Registration: Registration type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'registration';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'gruntreg' => 'gruntreg',
+);
+$handler->display->display_options['displays'] = array(
+  'default' => 'default',
+);
+$handler->display->display_options['attachment_position'] = 'after';
+
+/* Display: Summary - multi total */
+$handler = $view->new_display('page', 'Summary - multi total', 'page_1');
+$handler->display->display_options['enabled'] = FALSE;
+$handler->display->display_options['path'] = 'admin/entry_management/summary2';
+$handler->display->display_options['menu']['type'] = 'tab';
+$handler->display->display_options['menu']['title'] = 'New Summary';
+$handler->display->display_options['menu']['weight'] = '20';
+$handler->display->display_options['menu']['name'] = 'menu-event-management';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
+
+/* Display: Summary By Event Type */
+$handler = $view->new_display('page', 'Summary By Event Type', 'page_2');
+$handler->display->display_options['enabled'] = FALSE;
+$handler->display->display_options['defaults']['style_plugin'] = FALSE;
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'type' => 'type',
+  'title' => 'title',
+  'nothing' => 'nothing',
+  'count' => 'count',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'type' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'title' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'nothing' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'count' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+$handler->display->display_options['defaults']['style_options'] = FALSE;
+$handler->display->display_options['defaults']['row_plugin'] = FALSE;
+$handler->display->display_options['defaults']['row_options'] = FALSE;
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Registration: Registration type */
+$handler->display->display_options['fields']['type']['id'] = 'type';
+$handler->display->display_options['fields']['type']['table'] = 'registration';
+$handler->display->display_options['fields']['type']['field'] = 'type';
+$handler->display->display_options['fields']['type']['exclude'] = TRUE;
+$handler->display->display_options['fields']['type']['alter']['alter_text'] = TRUE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['relationship'] = 'registration_related_node';
+$handler->display->display_options['fields']['title']['label'] = 'Event';
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Status';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Total';
+/* Field: SUM(Registration: Slots consumed) */
+$handler->display->display_options['fields']['count']['id'] = 'count';
+$handler->display->display_options['fields']['count']['table'] = 'registration';
+$handler->display->display_options['fields']['count']['field'] = 'count';
+$handler->display->display_options['fields']['count']['group_type'] = 'sum';
+$handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Registration: Registration type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'registration';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['group'] = 1;
+$handler->display->display_options['filters']['type']['exposed'] = TRUE;
+$handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+$handler->display->display_options['filters']['type']['expose']['label'] = 'Event';
+$handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+$handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+$handler->display->display_options['filters']['type']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Registration: State entity */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'registration';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  'waitlist' => 'waitlist',
+  'invited' => 'invited',
+  'complete' => 'complete',
+  'paid' => 'paid',
+);
+$handler->display->display_options['filters']['state']['group'] = 1;
+$handler->display->display_options['filters']['state']['exposed'] = TRUE;
+$handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+$handler->display->display_options['filters']['state']['expose']['label'] = 'Status';
+$handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+$handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+$handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
+/* Filter criterion: Registration: Runner Type (field_runner_type) */
+$handler->display->display_options['filters']['field_runner_type_tid']['id'] = 'field_runner_type_tid';
+$handler->display->display_options['filters']['field_runner_type_tid']['table'] = 'field_data_field_runner_type';
+$handler->display->display_options['filters']['field_runner_type_tid']['field'] = 'field_runner_type_tid';
+$handler->display->display_options['filters']['field_runner_type_tid']['group'] = 1;
+$handler->display->display_options['filters']['field_runner_type_tid']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['operator_id'] = 'field_runner_type_tid_op';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['label'] = 'Runner Type';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['operator'] = 'field_runner_type_tid_op';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['identifier'] = 'field_runner_type_tid';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['field_runner_type_tid']['type'] = 'select';
+$handler->display->display_options['filters']['field_runner_type_tid']['vocabulary'] = 'runner_type';
+/* Filter criterion: Profile: Gender (field_gender) */
+$handler->display->display_options['filters']['field_gender_value']['id'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['table'] = 'field_data_field_gender';
+$handler->display->display_options['filters']['field_gender_value']['field'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_gender_value']['group'] = 1;
+$handler->display->display_options['filters']['field_gender_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator_id'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['label'] = 'Gender';
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['identifier'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Profile: Name &amp; Address - Country */
+$handler->display->display_options['filters']['field_name_address_country']['id'] = 'field_name_address_country';
+$handler->display->display_options['filters']['field_name_address_country']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['filters']['field_name_address_country']['field'] = 'field_name_address_country';
+$handler->display->display_options['filters']['field_name_address_country']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_name_address_country']['value'] = array(
+  'AU' => 'AU',
+  'CA' => 'CA',
+  'NZ' => 'NZ',
+  'ZA' => 'ZA',
+  'GB' => 'GB',
+  'US' => 'US',
+);
+$handler->display->display_options['filters']['field_name_address_country']['group'] = 1;
+$handler->display->display_options['filters']['field_name_address_country']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_name_address_country']['expose']['operator_id'] = 'field_name_address_country_op';
+$handler->display->display_options['filters']['field_name_address_country']['expose']['label'] = 'Country in';
+$handler->display->display_options['filters']['field_name_address_country']['expose']['operator'] = 'field_name_address_country_op';
+$handler->display->display_options['filters']['field_name_address_country']['expose']['identifier'] = 'field_name_address_country';
+$handler->display->display_options['filters']['field_name_address_country']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['field_name_address_country']['expose']['reduce'] = TRUE;
+/* Filter criterion: Profile: Name &amp; Address - Country */
+$handler->display->display_options['filters']['field_name_address_country_1']['id'] = 'field_name_address_country_1';
+$handler->display->display_options['filters']['field_name_address_country_1']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['filters']['field_name_address_country_1']['field'] = 'field_name_address_country';
+$handler->display->display_options['filters']['field_name_address_country_1']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_name_address_country_1']['operator'] = 'not in';
+$handler->display->display_options['filters']['field_name_address_country_1']['value'] = array(
+  'NZ' => 'NZ',
+);
+$handler->display->display_options['filters']['field_name_address_country_1']['group'] = 1;
+$handler->display->display_options['filters']['field_name_address_country_1']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['operator_id'] = 'field_name_address_country_1_op';
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['label'] = 'Country not in';
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['operator'] = 'field_name_address_country_1_op';
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['identifier'] = 'field_name_address_country_1';
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['reduce'] = TRUE;
+$handler->display->display_options['path'] = 'admin/entry_management/summary3';
+$handler->display->display_options['menu']['type'] = 'tab';
+$handler->display->display_options['menu']['title'] = 'Summary Style 2';
+$handler->display->display_options['menu']['weight'] = '21';
+$handler->display->display_options['menu']['name'] = 'menu-event-management';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
+
+/* Display: Summary Total */
+$handler = $view->new_display('page', 'Summary Total', 'page_3');
+$handler->display->display_options['defaults']['pager'] = FALSE;
+$handler->display->display_options['pager']['type'] = 'none';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['defaults']['style_plugin'] = FALSE;
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'type' => 'type',
+  'title' => 'title',
+  'nothing' => 'nothing',
+  'count' => 'count',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'type' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'title' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'nothing' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'count' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+$handler->display->display_options['defaults']['style_options'] = FALSE;
+$handler->display->display_options['defaults']['row_plugin'] = FALSE;
+$handler->display->display_options['defaults']['row_options'] = FALSE;
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Status';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Total';
+/* Field: SUM(Registration: Slots consumed) */
+$handler->display->display_options['fields']['count']['id'] = 'count';
+$handler->display->display_options['fields']['count']['table'] = 'registration';
+$handler->display->display_options['fields']['count']['field'] = 'count';
+$handler->display->display_options['fields']['count']['group_type'] = 'sum';
+$handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Registration: Registration type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'registration';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['group'] = 1;
+$handler->display->display_options['filters']['type']['exposed'] = TRUE;
+$handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+$handler->display->display_options['filters']['type']['expose']['label'] = 'Event';
+$handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+$handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+$handler->display->display_options['filters']['type']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Registration: State entity */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'registration';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  'waitlist' => 'waitlist',
+  'invited' => 'invited',
+  'complete' => 'complete',
+  'paid' => 'paid',
+);
+$handler->display->display_options['filters']['state']['group'] = 1;
+$handler->display->display_options['filters']['state']['exposed'] = TRUE;
+$handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+$handler->display->display_options['filters']['state']['expose']['label'] = 'Status';
+$handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+$handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+$handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
+/* Filter criterion: Registration: Runner Type (field_runner_type) */
+$handler->display->display_options['filters']['field_runner_type_tid']['id'] = 'field_runner_type_tid';
+$handler->display->display_options['filters']['field_runner_type_tid']['table'] = 'field_data_field_runner_type';
+$handler->display->display_options['filters']['field_runner_type_tid']['field'] = 'field_runner_type_tid';
+$handler->display->display_options['filters']['field_runner_type_tid']['group'] = 1;
+$handler->display->display_options['filters']['field_runner_type_tid']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['operator_id'] = 'field_runner_type_tid_op';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['label'] = 'Runner Type';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['operator'] = 'field_runner_type_tid_op';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['identifier'] = 'field_runner_type_tid';
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['field_runner_type_tid']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['field_runner_type_tid']['type'] = 'select';
+$handler->display->display_options['filters']['field_runner_type_tid']['vocabulary'] = 'runner_type';
+/* Filter criterion: Profile: Gender (field_gender) */
+$handler->display->display_options['filters']['field_gender_value']['id'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['table'] = 'field_data_field_gender';
+$handler->display->display_options['filters']['field_gender_value']['field'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_gender_value']['group'] = 1;
+$handler->display->display_options['filters']['field_gender_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator_id'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['label'] = 'Gender';
+$handler->display->display_options['filters']['field_gender_value']['expose']['operator'] = 'field_gender_value_op';
+$handler->display->display_options['filters']['field_gender_value']['expose']['identifier'] = 'field_gender_value';
+$handler->display->display_options['filters']['field_gender_value']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['field_gender_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+/* Filter criterion: Profile: Name &amp; Address - Country */
+$handler->display->display_options['filters']['field_name_address_country']['id'] = 'field_name_address_country';
+$handler->display->display_options['filters']['field_name_address_country']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['filters']['field_name_address_country']['field'] = 'field_name_address_country';
+$handler->display->display_options['filters']['field_name_address_country']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_name_address_country']['value'] = array(
+  'AU' => 'AU',
+  'CA' => 'CA',
+  'NZ' => 'NZ',
+  'ZA' => 'ZA',
+  'GB' => 'GB',
+  'US' => 'US',
+);
+$handler->display->display_options['filters']['field_name_address_country']['group'] = 1;
+$handler->display->display_options['filters']['field_name_address_country']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_name_address_country']['expose']['operator_id'] = 'field_name_address_country_op';
+$handler->display->display_options['filters']['field_name_address_country']['expose']['label'] = 'Country in';
+$handler->display->display_options['filters']['field_name_address_country']['expose']['operator'] = 'field_name_address_country_op';
+$handler->display->display_options['filters']['field_name_address_country']['expose']['identifier'] = 'field_name_address_country';
+$handler->display->display_options['filters']['field_name_address_country']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['field_name_address_country']['expose']['reduce'] = TRUE;
+/* Filter criterion: Profile: Name &amp; Address - Country */
+$handler->display->display_options['filters']['field_name_address_country_1']['id'] = 'field_name_address_country_1';
+$handler->display->display_options['filters']['field_name_address_country_1']['table'] = 'field_data_field_name_address';
+$handler->display->display_options['filters']['field_name_address_country_1']['field'] = 'field_name_address_country';
+$handler->display->display_options['filters']['field_name_address_country_1']['relationship'] = 'profile';
+$handler->display->display_options['filters']['field_name_address_country_1']['operator'] = 'not in';
+$handler->display->display_options['filters']['field_name_address_country_1']['value'] = array(
+  'NZ' => 'NZ',
+);
+$handler->display->display_options['filters']['field_name_address_country_1']['group'] = 1;
+$handler->display->display_options['filters']['field_name_address_country_1']['exposed'] = TRUE;
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['operator_id'] = 'field_name_address_country_1_op';
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['label'] = 'Country not in';
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['operator'] = 'field_name_address_country_1_op';
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['identifier'] = 'field_name_address_country_1';
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+);
+$handler->display->display_options['filters']['field_name_address_country_1']['expose']['reduce'] = TRUE;
+/* Filter criterion: CurrentYear */
+$handler->display->display_options['filters']['php']['id'] = 'php';
+$handler->display->display_options['filters']['php']['table'] = 'views';
+$handler->display->display_options['filters']['php']['field'] = 'php';
+$handler->display->display_options['filters']['php']['ui_name'] = 'CurrentYear';
+$handler->display->display_options['filters']['php']['use_php_setup'] = 0;
+$handler->display->display_options['filters']['php']['php_filter'] = '    $race_date = getdate(strtotime("first Saturday of December"));
+    $race_year = $race_date[\'year\'];
+    $reg_year = getdate($row->created)[\'year\'];
+    if ($reg_year < $race_year ) {
+        return TRUE; // Rows where this returns true are not displayed
+    }
+    else {
+        return FALSE;
+    }';
+$handler->display->display_options['path'] = 'admin/entry_management/summary';
+$handler->display->display_options['menu']['type'] = 'tab';
+$handler->display->display_options['menu']['title'] = 'Summary';
+$handler->display->display_options['menu']['weight'] = '-15';
+$handler->display->display_options['menu']['name'] = 'menu-event-management';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
