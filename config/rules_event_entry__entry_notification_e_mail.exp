@@ -1,0 +1,113 @@
+{ "rules_event_entry__entry_notification_e_mail" : {
+    "LABEL" : "Event entry:  entry notification e-mail",
+    "PLUGIN" : "reaction rule",
+    "WEIGHT" : "3",
+    "ACTIVE" : false,
+    "OWNER" : "rules",
+    "TAGS" : [ "event entry", "norwegian.blue" ],
+    "REQUIRES" : [ "rules", "php", "message_notify", "commerce_checkout" ],
+    "ON" : { "commerce_checkout_complete" : [] },
+    "IF" : [
+      { "entity_has_field" : {
+          "entity" : [ "commerce-order:commerce-line-items:0" ],
+          "field" : "registration_commerce_reg"
+        }
+      },
+      { "entity_has_field" : {
+          "entity" : [ "commerce-order:commerce-line-items:0:registration-commerce-reg" ],
+          "field" : "field_event_title"
+        }
+      },
+      { "entity_has_field" : {
+          "entity" : [ "commerce-order:commerce-line-items:0:registration-commerce-reg" ],
+          "field" : "field_sponsor"
+        }
+      },
+      { "entity_has_field" : {
+          "entity" : [ "commerce-order:commerce-line-items:0:registration-commerce-reg" ],
+          "field" : "field_year"
+        }
+      }
+    ],
+    "DO" : [
+      { "entity_create" : {
+          "USING" : {
+            "type" : "message",
+            "param_type" : "event_entry_entry_confirmation",
+            "param_user" : [ "commerce-order:owner" ]
+          },
+          "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } }
+        }
+      },
+      { "entity_fetch" : {
+          "USING" : {
+            "type" : "user",
+            "id" : [
+              "commerce-order:commerce-line-items:0:registration-commerce-reg:user-uid"
+            ]
+          },
+          "PROVIDE" : { "entity_fetched" : { "entered_user_entity" : "Entered user entity" } }
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:registration-view-url" ],
+          "value" : [ "commerce-order:commerce-line-items:0:registration-commerce-reg:url" ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entrant-name" ],
+          "value" : [ "entered-user-entity:profile-main:field-name-address:first-name" ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entry-year" ],
+          "value" : "\u003C?php echo date(\u0022Y\u0022); ?\u003E"
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entry-sponsor" ],
+          "value" : [
+            "commerce-order:commerce-line-items:0:registration-commerce-reg:field-sponsor"
+          ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entry-event" ],
+          "value" : [
+            "commerce-order:commerce-line-items:0:registration-commerce-reg:field-event-title"
+          ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entrant-email" ],
+          "value" : [ "commerce-order:commerce-line-items:0:registration-commerce-reg:mail" ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:username" ],
+          "value" : [ "entered-user-entity:name" ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entryid" ],
+          "value" : [
+            "commerce-order:commerce-line-items:0:registration-commerce-reg:registration-id"
+          ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:fullname" ],
+          "value" : [ "entered-user-entity:profile-main:field-name-address:name-line" ]
+        }
+      },
+      { "entity_save" : { "data" : [ "entity-created" ], "immediate" : 1 } },
+      { "message_notify_process" : {
+          "message" : [ "entity-created" ],
+          "save_on_fail" : "0",
+          "save_on_success" : "0",
+          "mail" : [ "entity-created:arguments:entrant-email" ]
+        }
+      }
+    ]
+  }
+}

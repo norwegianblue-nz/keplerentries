@@ -28,6 +28,11 @@ htdocs/sites/default/
 htdocs/sites/example.sites.php
 htdocs/sites/README.txt
 htdocs/sites/all/themes/
+htdocs/data.sql
+htdocs/sites.oem/
+htdocs/sites.old/
+htdocs/sites/sandbox.entrieskeplerchallenge.co.nz
+htdocs/sites/tyke.entrieskeplerchallenge.co.nz
 
 htdocs/sites/*/settings.php
 

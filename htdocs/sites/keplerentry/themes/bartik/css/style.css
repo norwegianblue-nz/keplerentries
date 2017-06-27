@@ -1744,6 +1744,9 @@ body, #site-slogan, .ui-widget, .comment-form label { /* line 105 */
 
 /* Hide banner for login iFrame (#header on line 24) */
 body.page-user-login #header {display:none !important;}
+/* Hide banner for management screens (#header on line 24) */
+body.page-admin-entry-management #header,
+body.page-admin-keplerusers #header {display:none !important;}
 
 /* Button styling */
 input.form-submit, a.button, #user-login-form > div a, /* line 1087 and others */
@@ -1762,6 +1765,29 @@ input.form-submit, a.button, #user-login-form > div a, /* line 1087 and others *
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
+
+/* Style the editable fields in "Entries" view */
+#views-form-entries-management-page .editablefield-item .editablefield-edit-button,
+#views-form-entries-management-page .editablefield-item .form-submit {
+    font-size: 1.7em;
+    padding: 0 2px;
+    float: left;
+    margin: 0 0 0 4px;
+    line-height: 1;
+}
+#views-form-entries-management-page .editablefield-item .field {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.2;
+}
+#views-form-entries-management-page .editablefield-item {word-wrap: normal;}
+#views-form-entries-management-page td.views-field-editablefield {padding: 3px;}
+#views-form-entries-management-page .editablefield-item .form-item label .form-required {display: none;}
+#views-form-entries-management-page .editablefield-item .description {display: none;}
+#views-form-entries-management-page .editablefield-item .form-actions {margin: 0; padding:0; float: left;}
+
+/* End of editable fields view styling */
+
 .cart-message a {display:block; width:200px;} /* Cart logout button */
 .cart-message a:hover {background-color:#dedede;}
 

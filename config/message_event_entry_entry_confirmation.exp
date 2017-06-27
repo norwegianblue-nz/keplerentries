@@ -1,0 +1,36 @@
+{
+  "name" : "event_entry_entry_confirmation",
+  "description" : "Event entry: entry confirmation",
+  "argument_keys" : [
+    "@registration_view_url",
+    "@entry_year",
+    "@entry_sponsor",
+    "@entry_event",
+    "@entrant_name",
+    "@entrant_email",
+    "@username",
+    "@entryid",
+    "@fullname"
+  ],
+  "argument" : [],
+  "category" : "message_type",
+  "data" : {
+    "token options" : { "clear" : 0 },
+    "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+  },
+  "language" : "",
+  "arguments" : null,
+  "message_text" : { "und" : [
+      {
+        "value" : "@entry_year @entry_sponsor @entry_event entry confirmation. Reference @entryid",
+        "format" : "plain_text",
+        "safe_value" : "\u003Cp\u003E@entry_year @entry_sponsor @entry_event entry confirmation. Reference @entryid\u003C\/p\u003E\n"
+      },
+      {
+        "value" : "Dear @entrant_name\r\nThank you for your order and payment - your entry into the @entry_year @entry_sponsor @entry_event is now secured.\r\n\r\nYour entry reference is @entryid\r\n\r\nYou can log in to your Kepler Account (username: @username)  at https:\/\/entries.keplerchallenge.co.nz to view your entry status and add extra items.\r\n\r\nNote that you are obliged to ensure that all your details are kept up to date, especially medical and email.\r\n\r\nGood luck with the training!\r\n-- \r\n@entry_year @entry_sponsor Kepler Challenge entry team \r\n\r\n",
+        "format" : "commerce_order_message",
+        "safe_value" : "Dear @entrant_name\nThank you for your order and payment - your entry into the @entry_year @entry_sponsor @entry_event is now secured.\n\nYour entry reference is @entryid\n\nYou can log in to your Kepler Account (username: @username)  at https:\/\/entries.keplerchallenge.co.nz to view your entry status and add extra items.\n\nNote that you are obliged to ensure that all your details are kept up to date, especially medical and email.\n\nGood luck with the training!\n-- \n@entry_year @entry_sponsor Kepler Challenge entry team"
+      }
+    ]
+  }
+}

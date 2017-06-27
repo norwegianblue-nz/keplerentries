@@ -98,6 +98,15 @@ $handler->display->display_options['fields']['count']['table'] = 'registration';
 $handler->display->display_options['fields']['count']['field'] = 'count';
 $handler->display->display_options['fields']['count']['group_type'] = 'sum';
 $handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+/* Field: Registration: Date created */
+$handler->display->display_options['fields']['created']['id'] = 'created';
+$handler->display->display_options['fields']['created']['table'] = 'registration';
+$handler->display->display_options['fields']['created']['field'] = 'created';
+$handler->display->display_options['fields']['created']['label'] = '';
+$handler->display->display_options['fields']['created']['exclude'] = TRUE;
+$handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['created']['date_format'] = 'long';
+$handler->display->display_options['fields']['created']['second_date_format'] = 'long';
 /* Filter criterion: Registration: State entity */
 $handler->display->display_options['filters']['state']['id'] = 'state';
 $handler->display->display_options['filters']['state']['table'] = 'registration';
@@ -138,6 +147,20 @@ $handler->display->display_options['filters']['field_gender_value']['expose']['r
   5 => 0,
   6 => 0,
 );
+/* Filter criterion: Global: PHP */
+$handler->display->display_options['filters']['php']['id'] = 'php';
+$handler->display->display_options['filters']['php']['table'] = 'views';
+$handler->display->display_options['filters']['php']['field'] = 'php';
+$handler->display->display_options['filters']['php']['use_php_setup'] = 0;
+$handler->display->display_options['filters']['php']['php_filter'] = '    $race_date = getdate(strtotime("first Saturday of December"));
+    $race_year = $race_date[\'year\'];
+    $reg_year = getdate($row->created)[\'year\'];
+    if ($reg_year < $race_year ) {
+        return TRUE; // Rows where this returns true are not displayed
+    }
+    else {
+        return FALSE;
+    }';
 
 /* Display: Kepler Complete */
 $handler = $view->new_display('attachment', 'Kepler Complete', 'attachment_1');
@@ -722,6 +745,15 @@ $handler->display->display_options['fields']['count']['table'] = 'registration';
 $handler->display->display_options['fields']['count']['field'] = 'count';
 $handler->display->display_options['fields']['count']['group_type'] = 'sum';
 $handler->display->display_options['fields']['count']['label'] = 'Places Taken';
+/* Field: Registration: Date created */
+$handler->display->display_options['fields']['created']['id'] = 'created';
+$handler->display->display_options['fields']['created']['table'] = 'registration';
+$handler->display->display_options['fields']['created']['field'] = 'created';
+$handler->display->display_options['fields']['created']['label'] = '';
+$handler->display->display_options['fields']['created']['exclude'] = TRUE;
+$handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['created']['date_format'] = 'long';
+$handler->display->display_options['fields']['created']['second_date_format'] = 'long';
 $handler->display->display_options['defaults']['filter_groups'] = FALSE;
 $handler->display->display_options['defaults']['filters'] = FALSE;
 /* Filter criterion: Registration: Registration type */

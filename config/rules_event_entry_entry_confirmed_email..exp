@@ -1,0 +1,75 @@
+{ "rules_event_entry_entry_confirmed_email" : {
+    "LABEL" : "Event entry: entry confirmed e-mail",
+    "PLUGIN" : "reaction rule",
+    "WEIGHT" : "3",
+    "OWNER" : "rules",
+    "TAGS" : [ "event entry", "norwegian.blue" ],
+    "REQUIRES" : [ "rules", "php", "message_notify", "registration" ],
+    "ON" : { "registration_update" : [] },
+    "IF" : [
+      { "entity_has_field" : { "entity" : [ "registration" ], "field" : "field_event_title" } },
+      { "data_is" : { "data" : [ "registration:state" ], "value" : "paid" } },
+      { "NOT data_is" : { "data" : [ "registration-unchanged:state" ], "value" : "paid" } },
+      { "entity_has_field" : { "entity" : [ "registration:entity" ], "field" : "field_entryform" } }
+    ],
+    "DO" : [
+      { "entity_create" : {
+          "USING" : {
+            "type" : "message",
+            "param_type" : "event_entry_entry_confirmation",
+            "param_user" : [ "site:current-user" ]
+          },
+          "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } }
+        }
+      },
+      { "entity_fetch" : {
+          "USING" : { "type" : "user", "id" : [ "registration:user-uid" ] },
+          "PROVIDE" : { "entity_fetched" : { "entered_user_entity" : "Entered user entity" } }
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:registration-view-url" ],
+          "value" : [ "registration:url" ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entrant-name" ],
+          "value" : [ "entered-user-entity:profile-main:field-name-address:first-name" ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entry-event" ],
+          "value" : [ "registration:field-event-title" ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entry-year" ],
+          "value" : "\u003C?php echo date(\u0022Y\u0022); ?\u003E"
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entry-sponsor" ],
+          "value" : "[registration:field-sponsor]"
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:username" ],
+          "value" : [ "entered-user-entity:name" ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "entity-created:arguments:entryid" ],
+          "value" : [ "registration:entity-id" ]
+        }
+      },
+      { "entity_save" : { "data" : [ "entity-created" ], "immediate" : "1" } },
+      { "message_notify_process" : {
+          "message" : [ "entity-created" ],
+          "save_on_fail" : "0",
+          "save_on_success" : "0",
+          "mail" : [ "registration:mail" ]
+        }
+      }
+    ]
+  }
+}

@@ -376,7 +376,7 @@ function editablefields_form($form, &$form_state, $entity_type, $entity, $field,
     $form['actions']['submit'] = array(
       '#name' => 'submit-' . implode('-', $form['#parents']),
       '#type' => 'submit',
-      '#value' => t('Save'),
+      '#value' => t('✔'), // norwegian.blue
       '#ajax' => $ajax,
       '#submit' => array('editablefields_form_submit'),
       '#limit_validation_errors' => array($form['#parents']),
@@ -397,7 +397,7 @@ function editablefields_form($form, &$form_state, $entity_type, $entity, $field,
     $form['actions']['edit'] = array(
       '#name' => 'edit-' . implode('-', $form['#parents']),
       '#type' => 'submit',
-      '#value' => t('Edit this field'),
+      '#value' => t('✍'), // norwegian.blue
       '#submit' => array('editablefields_form_submit_edit_mode'),
       '#ajax' => $ajax,
       '#limit_validation_errors' => array($form['#parents']),

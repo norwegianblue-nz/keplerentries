@@ -288,29 +288,18 @@ $handler->display->display_options['fields']['state_edit']['id'] = 'state_edit';
 $handler->display->display_options['fields']['state_edit']['table'] = 'registration';
 $handler->display->display_options['fields']['state_edit']['field'] = 'state_edit';
 $handler->display->display_options['fields']['state_edit']['label'] = 'Status';
-/* Field: Registration: Est. Time this year (editable) */
-$handler->display->display_options['fields']['field_est_time_this_year_editable']['id'] = 'field_est_time_this_year_editable';
-$handler->display->display_options['fields']['field_est_time_this_year_editable']['table'] = 'field_data_field_est_time_this_year';
-$handler->display->display_options['fields']['field_est_time_this_year_editable']['field'] = 'field_est_time_this_year_editable';
-$handler->display->display_options['fields']['field_est_time_this_year_editable']['label'] = 'Est. Time';
-$handler->display->display_options['fields']['field_est_time_this_year_editable']['type'] = 'editable';
-$handler->display->display_options['fields']['field_est_time_this_year_editable']['settings'] = array(
-  'click_to_edit' => 1,
-  'click_to_edit_style' => 'hover',
-  'empty_text' => '',
-  'fallback_format' => 'date_default',
-  'fallback_settings' => array(
-    'format_type' => 'timeonly',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  ),
+/* Field: Registration: Est. Time this year */
+$handler->display->display_options['fields']['field_est_time_this_year']['id'] = 'field_est_time_this_year';
+$handler->display->display_options['fields']['field_est_time_this_year']['table'] = 'field_data_field_est_time_this_year';
+$handler->display->display_options['fields']['field_est_time_this_year']['field'] = 'field_est_time_this_year';
+$handler->display->display_options['fields']['field_est_time_this_year']['settings'] = array(
+  'format_type' => 'timeonly',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
 );
-$handler->display->display_options['fields']['field_est_time_this_year_editable']['widget_type'] = '0';
-$handler->display->display_options['fields']['field_est_time_this_year_editable']['suppress_label'] = 1;
-$handler->display->display_options['fields']['field_est_time_this_year_editable']['suppress_description'] = 1;
 /* Field: Registration: Medal Year (editable) */
 $handler->display->display_options['fields']['field_medal_year_editable']['id'] = 'field_medal_year_editable';
 $handler->display->display_options['fields']['field_medal_year_editable']['table'] = 'field_data_field_medal_year';
@@ -342,30 +331,6 @@ $handler->display->display_options['fields']['field_no_of_prev_events_editable']
 $handler->display->display_options['fields']['field_no_of_prev_events_editable']['widget_type'] = 'options_select';
 $handler->display->display_options['fields']['field_no_of_prev_events_editable']['suppress_label'] = 1;
 $handler->display->display_options['fields']['field_no_of_prev_events_editable']['suppress_description'] = 1;
-/* Field: Registration: Previous best result (editable) */
-$handler->display->display_options['fields']['field_previous_best_time_editable']['id'] = 'field_previous_best_time_editable';
-$handler->display->display_options['fields']['field_previous_best_time_editable']['table'] = 'field_data_field_previous_best_time';
-$handler->display->display_options['fields']['field_previous_best_time_editable']['field'] = 'field_previous_best_time_editable';
-$handler->display->display_options['fields']['field_previous_best_time_editable']['label'] = 'Prev best';
-$handler->display->display_options['fields']['field_previous_best_time_editable']['exclude'] = TRUE;
-$handler->display->display_options['fields']['field_previous_best_time_editable']['type'] = 'editable';
-$handler->display->display_options['fields']['field_previous_best_time_editable']['settings'] = array(
-  'click_to_edit' => 0,
-  'click_to_edit_style' => 'button',
-  'empty_text' => '',
-  'fallback_format' => 'date_default',
-  'fallback_settings' => array(
-    'format_type' => 'timeonly',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  ),
-);
-$handler->display->display_options['fields']['field_previous_best_time_editable']['widget_type'] = '0';
-$handler->display->display_options['fields']['field_previous_best_time_editable']['suppress_label'] = 1;
-$handler->display->display_options['fields']['field_previous_best_time_editable']['suppress_description'] = 1;
 /* Field: Registration: Runner Type (editable) */
 $handler->display->display_options['fields']['field_runner_type_editable']['id'] = 'field_runner_type_editable';
 $handler->display->display_options['fields']['field_runner_type_editable']['table'] = 'field_data_field_runner_type';
@@ -412,7 +377,10 @@ $handler->display->display_options['fields']['field_notes_editable']['settings']
   'click_to_edit' => 1,
   'click_to_edit_style' => 'button',
   'empty_text' => '',
-  'fallback_format' => 'text_plain',
+  'fallback_format' => 'text_trimmed',
+  'fallback_settings' => array(
+    'trim_length' => '90',
+  ),
 );
 $handler->display->display_options['fields']['field_notes_editable']['widget_type'] = '0';
 $handler->display->display_options['fields']['field_notes_editable']['suppress_label'] = 1;

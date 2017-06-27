@@ -1,6 +1,6 @@
 name = Editable Fields
-description = "Allows you to make some fields editable from the display."
-package = Fields
+description = "Allows you to make some fields editable from the display. Custom Version.  Edit and Save buttons have custom text (Unicode characters)"
+package = norwegianblue Custom
 core = 7.x
 
 dependencies[] = entity
