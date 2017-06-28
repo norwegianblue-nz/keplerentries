@@ -231,6 +231,15 @@ $handler->display->display_options['fields']['field_name_address_last_name']['ta
 $handler->display->display_options['fields']['field_name_address_last_name']['field'] = 'field_name_address_last_name';
 $handler->display->display_options['fields']['field_name_address_last_name']['relationship'] = 'profile';
 $handler->display->display_options['fields']['field_name_address_last_name']['label'] = 'Last name';
+/* Field: Registration: Date created */
+$handler->display->display_options['fields']['created']['id'] = 'created';
+$handler->display->display_options['fields']['created']['table'] = 'registration';
+$handler->display->display_options['fields']['created']['field'] = 'created';
+$handler->display->display_options['fields']['created']['label'] = '';
+$handler->display->display_options['fields']['created']['exclude'] = TRUE;
+$handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['created']['date_format'] = 'long';
+$handler->display->display_options['fields']['created']['second_date_format'] = 'long';
 /* Contextual filter: Content: Title */
 $handler->display->display_options['arguments']['title']['id'] = 'title';
 $handler->display->display_options['arguments']['title']['table'] = 'node';
@@ -597,6 +606,15 @@ $handler->display->display_options['fields']['order_id']['relationship'] = 'reve
 $handler->display->display_options['fields']['order_id']['label'] = 'Order';
 $handler->display->display_options['fields']['order_id']['alter']['make_link'] = TRUE;
 $handler->display->display_options['fields']['order_id']['alter']['path'] = 'admin/commerce/orders/[order_id]';
+/* Field: Registration: Date created */
+$handler->display->display_options['fields']['created']['id'] = 'created';
+$handler->display->display_options['fields']['created']['table'] = 'registration';
+$handler->display->display_options['fields']['created']['field'] = 'created';
+$handler->display->display_options['fields']['created']['label'] = '';
+$handler->display->display_options['fields']['created']['exclude'] = TRUE;
+$handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['created']['date_format'] = 'long';
+$handler->display->display_options['fields']['created']['second_date_format'] = 'long';
 $handler->display->display_options['defaults']['filter_groups'] = FALSE;
 $handler->display->display_options['defaults']['filters'] = FALSE;
 /* Filter criterion: CurrentYear */
@@ -776,6 +794,7 @@ $handler->display->display_options['tab_options']['name'] = 'menu-event-manageme
 $handler = $view->new_display('page', 'Edit entries', 'page_1');
 $handler->display->display_options['defaults']['title'] = FALSE;
 $handler->display->display_options['title'] = 'Edit entries';
+$handler->display->display_options['enabled'] = FALSE;
 $handler->display->display_options['defaults']['style_plugin'] = FALSE;
 $handler->display->display_options['style_plugin'] = 'editableviews_table';
 $handler->display->display_options['style_options']['columns'] = array(
@@ -1046,12 +1065,22 @@ $handler->display->display_options['fields']['updated']['field'] = 'updated';
 $handler->display->display_options['fields']['updated']['label'] = 'Entry updated';
 $handler->display->display_options['fields']['updated']['date_format'] = 'short';
 $handler->display->display_options['fields']['updated']['second_date_format'] = 'long';
+/* Field: Registration: Date created */
+$handler->display->display_options['fields']['created']['id'] = 'created';
+$handler->display->display_options['fields']['created']['table'] = 'registration';
+$handler->display->display_options['fields']['created']['field'] = 'created';
+$handler->display->display_options['fields']['created']['label'] = '';
+$handler->display->display_options['fields']['created']['exclude'] = TRUE;
+$handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['created']['date_format'] = 'long';
+$handler->display->display_options['fields']['created']['second_date_format'] = 'long';
 $handler->display->display_options['defaults']['filter_groups'] = FALSE;
 $handler->display->display_options['defaults']['filters'] = FALSE;
-/* Filter criterion: Global: PHP */
+/* Filter criterion: CurrentYear */
 $handler->display->display_options['filters']['php_1']['id'] = 'php_1';
 $handler->display->display_options['filters']['php_1']['table'] = 'views';
 $handler->display->display_options['filters']['php_1']['field'] = 'php';
+$handler->display->display_options['filters']['php_1']['ui_name'] = 'CurrentYear';
 $handler->display->display_options['filters']['php_1']['group'] = 1;
 $handler->display->display_options['filters']['php_1']['use_php_setup'] = 0;
 $handler->display->display_options['filters']['php_1']['php_filter'] = '    $race_date = getdate(strtotime("first Saturday of December"));
@@ -1236,11 +1265,6 @@ $handler->display->display_options['filters']['field_name_address_locality']['ex
   5 => 0,
   6 => 0,
 );
-/* Filter criterion: Global: PHP */
-$handler->display->display_options['filters']['php']['id'] = 'php';
-$handler->display->display_options['filters']['php']['table'] = 'views';
-$handler->display->display_options['filters']['php']['field'] = 'php';
-$handler->display->display_options['filters']['php']['group'] = 1;
 $handler->display->display_options['path'] = 'admin/entry_management/edit';
 $handler->display->display_options['menu']['type'] = 'tab';
 $handler->display->display_options['menu']['title'] = 'Edit entries';
@@ -3108,6 +3132,15 @@ $handler->display->display_options['fields']['field_year_of_previous_best_resu_e
 $handler->display->display_options['fields']['field_year_of_previous_best_resu_editable']['widget_type'] = '0';
 $handler->display->display_options['fields']['field_year_of_previous_best_resu_editable']['suppress_label'] = 1;
 $handler->display->display_options['fields']['field_year_of_previous_best_resu_editable']['suppress_description'] = 1;
+/* Field: Registration: Date created */
+$handler->display->display_options['fields']['created']['id'] = 'created';
+$handler->display->display_options['fields']['created']['table'] = 'registration';
+$handler->display->display_options['fields']['created']['field'] = 'created';
+$handler->display->display_options['fields']['created']['label'] = '';
+$handler->display->display_options['fields']['created']['exclude'] = TRUE;
+$handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['created']['date_format'] = 'long';
+$handler->display->display_options['fields']['created']['second_date_format'] = 'long';
 $handler->display->display_options['defaults']['filter_groups'] = FALSE;
 $handler->display->display_options['defaults']['filters'] = FALSE;
 /* Filter criterion: CurrentYear */

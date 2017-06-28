@@ -1,0 +1,9 @@
+    $race_date = getdate(strtotime("first Saturday of December"));
+    $race_year = $race_date['year'];
+    $reg_year = getdate($row->created)['year'];
+    if ($reg_year < $race_year ) {
+        return TRUE; // Rows where this returns true are not displayed
+    }
+    else {
+        return FALSE;
+    }

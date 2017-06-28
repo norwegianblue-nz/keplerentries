@@ -1,0 +1,72 @@
+$view = new view();
+$view->name = 'merchandise_order_totals';
+$view->description = '';
+$view->tag = 'norwegian.blue, event entry';
+$view->base_table = 'commerce_line_item';
+$view->human_name = 'Merchandise Order Totals';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'Merchandise Order Totals';
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['group_by'] = TRUE;
+$handler->display->display_options['access']['type'] = 'none';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['pager']['options']['items_per_page'] = '100';
+$handler->display->display_options['style_plugin'] = 'table';
+/* Field: Commerce Line Item: Label */
+$handler->display->display_options['fields']['line_item_label']['id'] = 'line_item_label';
+$handler->display->display_options['fields']['line_item_label']['table'] = 'commerce_line_item';
+$handler->display->display_options['fields']['line_item_label']['field'] = 'line_item_label';
+$handler->display->display_options['fields']['line_item_label']['label'] = 'SKU';
+/* Field: SUM(Commerce Line Item: Quantity) */
+$handler->display->display_options['fields']['quantity']['id'] = 'quantity';
+$handler->display->display_options['fields']['quantity']['table'] = 'commerce_line_item';
+$handler->display->display_options['fields']['quantity']['field'] = 'quantity';
+$handler->display->display_options['fields']['quantity']['group_type'] = 'sum';
+$handler->display->display_options['fields']['quantity']['precision'] = '0';
+/* Sort criterion: Commerce Line Item: Label */
+$handler->display->display_options['sorts']['line_item_label']['id'] = 'line_item_label';
+$handler->display->display_options['sorts']['line_item_label']['table'] = 'commerce_line_item';
+$handler->display->display_options['sorts']['line_item_label']['field'] = 'line_item_label';
+/* Filter criterion: CurrentYear */
+$handler->display->display_options['filters']['php']['id'] = 'php';
+$handler->display->display_options['filters']['php']['table'] = 'views';
+$handler->display->display_options['filters']['php']['field'] = 'php';
+$handler->display->display_options['filters']['php']['ui_name'] = 'CurrentYear';
+$handler->display->display_options['filters']['php']['group'] = 1;
+$handler->display->display_options['filters']['php']['use_php_setup'] = 0;
+$handler->display->display_options['filters']['php']['php_filter'] = '    $race_date = getdate(strtotime("first Saturday of December"));
+    $race_year = $race_date[\'year\'];
+    $reg_year = getdate($row->created)[\'year\'];
+    if ($reg_year < $race_year ) {
+        return TRUE; // Rows where this returns true are not displayed
+    }
+    else {
+        return FALSE;
+    }';
+/* Filter criterion: Commerce Line Item: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'commerce_line_item';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'product' => 'product',
+);
+$handler->display->display_options['filters']['type']['group'] = 1;
+
+/* Display: Page */
+$handler = $view->new_display('page', 'Page', 'page');
+$handler->display->display_options['path'] = 'admin/commerce/merchandise-order-totals';
+
+/* Display: Data export */
+$handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+$handler->display->display_options['pager']['type'] = 'none';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+$handler->display->display_options['path'] = 'admin/data_export/merchandise_totals.csv';
